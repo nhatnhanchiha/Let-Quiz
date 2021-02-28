@@ -1,0 +1,27 @@
+<div class="container">
+    <form action="#" class="mx-auto mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
+        <p class="h3 text-center">Login</p>
+
+        <div class="form-group">
+            <label>User Name</label>
+            <input type="text" name="UserName" [(ngModel)]="acc.username" class="form-control"
+                    maxlength="50" required
+                    placeholder="User name">
+        </div>
+        
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="Password" [(ngModel)]="acc.password" class="form-control"
+                    maxlength="30" required
+                    placeholder="Password">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+
+        <div class="form-group">
+            <a href="" class="btn btn-secondary">Register</a>
+        </div>
+    </form>
+</div>

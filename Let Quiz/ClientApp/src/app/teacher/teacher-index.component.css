@@ -1,0 +1,16 @@
+nav {
+    background: #798188;
+    height: 100vh;
+}
+
+.nav-link, .h2 {
+    color: #ffffffd7;
+}
+
+.nav-link {
+    font-size: 20px;
+}
+
+.h2 {
+    font-size: 30px;
+}

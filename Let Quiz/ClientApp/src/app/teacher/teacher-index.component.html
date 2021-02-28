@@ -1,0 +1,24 @@
+
+<div class="row">
+    <nav class="nav flex-column navbar navbar-light col-3 justify-content-start">
+        <p class="h2 text-center navbar-brand">Welcome: {{ account.name }}</p>
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Log out</a>
+    </nav>
+    
+    <div class="col-9 mt-5">
+        <div class="row justify-content-between mx-5">
+            <div class="card col-5 mb-4" *ngFor='let quiz of quizzes'>
+                <div class="card-header">{{ quiz.name }}</div>
+                <div class="card-body">
+                    <div>Duration: {{ quiz.duration }} minutes</div>
+                    <div>Creator: {{ quiz.teacherName }}</div>
+                    <div>Create Date: {{ quiz.createDate }}</div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Take Quiz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

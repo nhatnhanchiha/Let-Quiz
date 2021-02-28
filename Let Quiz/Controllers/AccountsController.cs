@@ -7,116 +7,82 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LetQuiz.Data;
 using LetQuiz.Domain;
+using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+using Let_Quiz.Models;
+using Let_Quiz.Services;
 
 namespace Let_Quiz.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/accounts")]
     [ApiController]
     public class AccountsController : ControllerBase
     {
         private readonly LetQuizContext _context;
+        private readonly IMapper _mapper;
+        private readonly IAccountsRepository _accountsRepository;
 
-        public AccountsController(LetQuizContext context)
+        public AccountsController(LetQuizContext context, IAccountsRepository accountsRepository, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
+            _accountsRepository = accountsRepository;
         }
 
-        // GET: api/Accounts
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
+        // Get: api/accounts/Username
+        [HttpGet("{Username}")]
+        public ActionResult<AccountDTO> GetAccount(string Username)
         {
-            return await _context.Accounts.ToListAsync();
+            var account = _accountsRepository.GetAccount(Username);
+
+            return Ok(_mapper.Map<AccountDTO>(account));
         }
 
-        // GET: api/Accounts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(string id)
-        {
-            var account = await _context.Accounts.FindAsync(id);
+        //// POST: api/Accounts
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<Account>> PostAccount(Account account)
+        //{
+        //    _context.Accounts.Add(account);
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (AccountExists(account.Username))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            if (account == null)
-            {
-                return NotFound();
-            }
+        //    return CreatedAtAction("GetAccount", new { id = account.Username }, account);
+        //}
 
-            return account;
-        }
+        //// DELETE: api/Accounts/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteAccount(string id)
+        //{
+        //    var account = await _context.Accounts.FindAsync(id);
+        //    if (account == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // PUT: api/Accounts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount(string id, Account account)
-        {
-            if (id != account.Username)
-            {
-                return BadRequest();
-            }
+        //    _context.Accounts.Remove(account);
+        //    await _context.SaveChangesAsync();
 
-            _context.Entry(account).State = EntityState.Modified;
+        //    return NoContent();
+        //}
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AccountExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Accounts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Account>> PostAccount(Account account)
-        {
-            _context.Accounts.Add(account);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (AccountExists(account.Username))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetAccount", new { id = account.Username }, account);
-        }
-
-        // DELETE: api/Accounts/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAccount(string id)
-        {
-            var account = await _context.Accounts.FindAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            _context.Accounts.Remove(account);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool AccountExists(string id)
-        {
-            return _context.Accounts.Any(e => e.Username == id);
-        }
+        //private bool AccountExists(string id)
+        //{
+        //    return _context.Accounts.Any(e => e.Username == id);
+        //}
     }
 }
