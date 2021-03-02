@@ -11,5 +11,6 @@ namespace Let_Quiz.Models
         public string Password { get; set; }
         public string Name { get; set; }
         public bool IsTeacher { get; set; }
+        public bool Status { get; set; }
     }
 }

@@ -17,8 +17,11 @@ export class LoginComponent {
         username: "",
         password: "",
         name: "",
-        isTeacher: true
-    }
+        isTeacher: true,
+        status: true
+    };
+
+    errorLogin: string;
 
     onSubmit() {
         this.accountService.getToken(this.acc).subscribe(
@@ -30,13 +33,14 @@ export class LoginComponent {
                         sessionStorage.setItem('account', JSON.stringify(account));
 
                         if(account.isTeacher == true) {
-                            this.router.navigate(['teacher-index']);
+                            // router den component teacher cua may ong
                         } else {
-                            // router den component student cua may ong
+                            this.router.navigate(['student-index']);
                         }
                 });
             },
-            (err: any) => console.log(err)
+            (err: any) => this.errorLogin = "Invalid username or password"
+            
         );
     }
 }

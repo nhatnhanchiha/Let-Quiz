@@ -17,11 +17,15 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <p class="text-danger">{{ errorLogin }}</p>
         </div>
 
         <div class="form-group">
-            <a href="" class="btn btn-secondary">Register</a>
+            <button class="btn btn-primary">Login</button>
+        </div>
+
+        <div class="form-group">
+            <a class="btn btn-secondary" [routerLink]="['/register']">Register</a>
         </div>
     </form>
 </div>

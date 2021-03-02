@@ -1,6 +1,7 @@
 ﻿using Let_Quiz.Models;
 using LetQuiz.Data;
 using LetQuiz.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Let_Quiz.Services
 
         public Account CheckLogin(string userName, string password)
         {
-            var account = _letQuizContext.Accounts.FirstOrDefault(c => c.Username.Equals(userName) && c.Password.Equals(password) && c.Status == true);
+            var account = _letQuizContext.Accounts.AsNoTracking().FirstOrDefault(c => c.Username.Equals(userName) && c.Password.Equals(password) && c.Status == true);
             return account;
         }
 
@@ -31,10 +32,35 @@ namespace Let_Quiz.Services
             {
                 Username = acc.Username,
                 Name = acc.Name,
-                IsTeacher = acc.IsTeacher
+                IsTeacher = acc.IsTeacher,
+                Status = acc.Status
             };
 
             return account;
+        }
+
+        public Account CheckUserNameExist(string userName)
+        {
+            var acc = _letQuizContext.Accounts.Find(userName);
+
+            if(acc == null)
+            {
+                return new Account()
+                {
+                    Username = ""
+                };
+            }
+
+            return new Account
+            {
+                Username = acc.Username,
+            };
+        }
+
+        public bool AddNewAccount(Account account)
+        {
+            _letQuizContext.Accounts.Add(account);
+            return _letQuizContext.SaveChanges() > 0;
         }
     }
 }

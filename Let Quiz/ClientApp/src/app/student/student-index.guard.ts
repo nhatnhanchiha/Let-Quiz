@@ -1,11 +1,11 @@
-import { Account } from './../models/Account';
+import { Account } from '../models/Account';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TeacherIndexGuard implements CanActivate {
+export class StudentIndexGuard implements CanActivate {
 
     constructor(private router: Router) { }
 
@@ -13,13 +13,13 @@ export class TeacherIndexGuard implements CanActivate {
 
         let account: Account = JSON.parse(sessionStorage.getItem('account'));
 
-        console.log(account);
-
         if(account != null) {
-            if(account.isTeacher == true){
+            if(account.isTeacher == false){
                 return true;
             }
         }
+
+        this.router.navigate(['/login']);
 
         return false;
     }

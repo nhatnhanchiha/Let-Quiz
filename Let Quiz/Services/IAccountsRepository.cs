@@ -10,5 +10,7 @@ namespace Let_Quiz.Services
     {
         Account CheckLogin(string userName, string password);
         Account GetAccount(string userName);
+        Account CheckUserNameExist(string userName);
+        bool AddNewAccount(Account account);
     }
 }

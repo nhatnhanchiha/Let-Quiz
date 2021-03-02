@@ -10,7 +10,7 @@ using LetQuiz.Domain;
 
 namespace Let_Quiz.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/answers")]
     [ApiController]
     public class AnswersController : ControllerBase
     {
@@ -21,88 +21,88 @@ namespace Let_Quiz.Controllers
             _context = context;
         }
 
-        // GET: api/Answers
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Answer>>> GetAnswers()
-        {
-            return await _context.Answers.ToListAsync();
-        }
+        //// GET: api/Answers
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Answer>>> GetAnswers()
+        //{
+        //    return await _context.Answers.ToListAsync();
+        //}
 
-        // GET: api/Answers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Answer>> GetAnswer(int id)
-        {
-            var answer = await _context.Answers.FindAsync(id);
+        //// GET: api/Answers/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Answer>> GetAnswer(int id)
+        //{
+        //    var answer = await _context.Answers.FindAsync(id);
 
-            if (answer == null)
-            {
-                return NotFound();
-            }
+        //    if (answer == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return answer;
-        }
+        //    return answer;
+        //}
 
-        // PUT: api/Answers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAnswer(int id, Answer answer)
-        {
-            if (id != answer.AnswerId)
-            {
-                return BadRequest();
-            }
+        //// PUT: api/Answers/5
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutAnswer(int id, Answer answer)
+        //{
+        //    if (id != answer.AnswerId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(answer).State = EntityState.Modified;
+        //    _context.Entry(answer).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AnswerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!AnswerExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        // POST: api/Answers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Answer>> PostAnswer(Answer answer)
-        {
-            _context.Answers.Add(answer);
-            await _context.SaveChangesAsync();
+        //// POST: api/Answers
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<Answer>> PostAnswer(Answer answer)
+        //{
+        //    _context.Answers.Add(answer);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAnswer", new { id = answer.AnswerId }, answer);
-        }
+        //    return CreatedAtAction("GetAnswer", new { id = answer.AnswerId }, answer);
+        //}
 
-        // DELETE: api/Answers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAnswer(int id)
-        {
-            var answer = await _context.Answers.FindAsync(id);
-            if (answer == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Answers/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteAnswer(int id)
+        //{
+        //    var answer = await _context.Answers.FindAsync(id);
+        //    if (answer == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Answers.Remove(answer);
-            await _context.SaveChangesAsync();
+        //    _context.Answers.Remove(answer);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        private bool AnswerExists(int id)
-        {
-            return _context.Answers.Any(e => e.AnswerId == id);
-        }
+        //private bool AnswerExists(int id)
+        //{
+        //    return _context.Answers.Any(e => e.AnswerId == id);
+        //}
     }
 }

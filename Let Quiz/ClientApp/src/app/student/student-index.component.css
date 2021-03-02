@@ -14,3 +14,7 @@ nav {
 .h2 {
     font-size: 30px;
 }
+
+a {
+    cursor: pointer;
+}

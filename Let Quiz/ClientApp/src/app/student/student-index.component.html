@@ -1,0 +1,49 @@
+<div class="row">
+    <nav class="nav flex-column navbar navbar-light col-3 justify-content-start">
+        <p class="h2 text-center navbar-brand">Welcome: {{ account.name }}</p>
+        <a href="#" class="nav-link">Home</a>
+        <a class="nav-link" (click)="logout()">Log out</a>
+    </nav>
+    
+    <div class="col-9 mt-5">
+        <div class="row justify-content-between mx-5">
+            <div class="card col-5 mb-4" *ngFor='let quiz of quizzes'>
+                <div class="card-header">{{ quiz.name }}</div>
+                <div class="card-body">
+                    <div>Duration: {{ quiz.duration }} minutes</div>
+                    <div>Creator: {{ quiz.teacherName }}</div>
+                    <div>Create Date: {{ quiz.createDate }}</div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" (click)="open(content, quiz.quizId)">Take Quiz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Enter the password to take the quiz</h4>
+      <button class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form class="form" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control"
+                        [(ngModel)]="password"
+                        placeholder="Enter password...">
+            </div>
+
+            <div class="form-group">
+                <p class="text-danger">{{ errPassword }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline-dark">Attempt</button>
+        </div>
+    </form>
+</ng-template>

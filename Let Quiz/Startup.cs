@@ -53,6 +53,8 @@ namespace Let_Quiz
 
             services.AddScoped<IAccountsRepository, AccountsRepository>();
             services.AddScoped<IQuizzesRepository, QuizzesRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IResultsRepository, ResultsRepository>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });

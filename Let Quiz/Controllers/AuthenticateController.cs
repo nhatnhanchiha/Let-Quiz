@@ -27,6 +27,8 @@ namespace Let_Quiz.Controllers
             this._accountsRepository = accountsRepository;
         }
 
+        // Anh Dung
+        // Post: api/authenticate/login
         [HttpPost]
         [Route("login")]
         public IActionResult Login([FromBody] AccountDTO account)
@@ -44,6 +46,8 @@ namespace Let_Quiz.Controllers
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                         new Claim("UserName", acc.Username),
                         new Claim("Name", acc.Name),
+                        new Claim("Password", acc.Password),
+                        new Claim("role", acc.IsTeacher.ToString()),
                         new Claim("IsTeacher", acc.IsTeacher.ToString())
                     };
 

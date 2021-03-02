@@ -10,7 +10,7 @@ using LetQuiz.Domain;
 
 namespace Let_Quiz.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/resultdetails")]
     [ApiController]
     public class ResultDetailsController : ControllerBase
     {
@@ -21,102 +21,102 @@ namespace Let_Quiz.Controllers
             _context = context;
         }
 
-        // GET: api/ResultDetails
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ResultDetail>>> GetResultDetails()
-        {
-            return await _context.ResultDetails.ToListAsync();
-        }
+        //// GET: api/ResultDetails
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<ResultDetail>>> GetResultDetails()
+        //{
+        //    return await _context.ResultDetails.ToListAsync();
+        //}
 
-        // GET: api/ResultDetails/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ResultDetail>> GetResultDetail(int id)
-        {
-            var resultDetail = await _context.ResultDetails.FindAsync(id);
+        //// GET: api/ResultDetails/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<ResultDetail>> GetResultDetail(int id)
+        //{
+        //    var resultDetail = await _context.ResultDetails.FindAsync(id);
 
-            if (resultDetail == null)
-            {
-                return NotFound();
-            }
+        //    if (resultDetail == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return resultDetail;
-        }
+        //    return resultDetail;
+        //}
 
-        // PUT: api/ResultDetails/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutResultDetail(int id, ResultDetail resultDetail)
-        {
-            if (id != resultDetail.AnswerId)
-            {
-                return BadRequest();
-            }
+        //// PUT: api/ResultDetails/5
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutResultDetail(int id, ResultDetail resultDetail)
+        //{
+        //    if (id != resultDetail.AnswerId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(resultDetail).State = EntityState.Modified;
+        //    _context.Entry(resultDetail).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ResultDetailExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ResultDetailExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        // POST: api/ResultDetails
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<ResultDetail>> PostResultDetail(ResultDetail resultDetail)
-        {
-            _context.ResultDetails.Add(resultDetail);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ResultDetailExists(resultDetail.AnswerId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //// POST: api/ResultDetails
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<ResultDetail>> PostResultDetail(ResultDetail resultDetail)
+        //{
+        //    _context.ResultDetails.Add(resultDetail);
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (ResultDetailExists(resultDetail.AnswerId))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return CreatedAtAction("GetResultDetail", new { id = resultDetail.AnswerId }, resultDetail);
-        }
+        //    return CreatedAtAction("GetResultDetail", new { id = resultDetail.AnswerId }, resultDetail);
+        //}
 
-        // DELETE: api/ResultDetails/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteResultDetail(int id)
-        {
-            var resultDetail = await _context.ResultDetails.FindAsync(id);
-            if (resultDetail == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/ResultDetails/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteResultDetail(int id)
+        //{
+        //    var resultDetail = await _context.ResultDetails.FindAsync(id);
+        //    if (resultDetail == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.ResultDetails.Remove(resultDetail);
-            await _context.SaveChangesAsync();
+        //    _context.ResultDetails.Remove(resultDetail);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        private bool ResultDetailExists(int id)
-        {
-            return _context.ResultDetails.Any(e => e.AnswerId == id);
-        }
+        //private bool ResultDetailExists(int id)
+        //{
+        //    return _context.ResultDetails.Any(e => e.AnswerId == id);
+        //}
     }
 }

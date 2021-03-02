@@ -32,4 +32,20 @@ export class AccountService {
             })
         });
     }
+
+    checkUserNameExist(userName: string) : Observable<Account> {
+        return this.http.get<Account>(this.urlAccount + '?Username=' + userName, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    register(account :Account) : Observable<Account> {
+        return this.http.post<Account>(this.urlAccount, account, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
 }

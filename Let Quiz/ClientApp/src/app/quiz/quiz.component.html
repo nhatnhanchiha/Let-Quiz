@@ -1,0 +1,26 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit()">
+        <div class="card" *ngFor="let question of questions">
+            <div class="card-body">
+                <div class="form-group">
+                    {{ question.content }}
+                </div>
+    
+                <div class="form-group" *ngFor="let answer of question.answers">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <input type="radio" name="{{ question.questionId }}" (click)="onSelectAnswer(question.questionId, answer.answerId)">
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" value="{{ answer.content }}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

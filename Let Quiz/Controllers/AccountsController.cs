@@ -14,7 +14,6 @@ using Let_Quiz.Services;
 
 namespace Let_Quiz.Controllers
 {
-    [Authorize]
     [Route("api/accounts")]
     [ApiController]
     public class AccountsController : ControllerBase
@@ -30,7 +29,9 @@ namespace Let_Quiz.Controllers
             _accountsRepository = accountsRepository;
         }
 
-        // Get: api/accounts/Username
+        // Anh Dung
+        // Get: api/accounts/{Username}
+        [Authorize]
         [HttpGet("{Username}")]
         public ActionResult<AccountDTO> GetAccount(string Username)
         {
@@ -39,50 +40,24 @@ namespace Let_Quiz.Controllers
             return Ok(_mapper.Map<AccountDTO>(account));
         }
 
-        //// POST: api/Accounts
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Account>> PostAccount(Account account)
-        //{
-        //    _context.Accounts.Add(account);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (AccountExists(account.Username))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        // Anh Dung
+        // Get: api/accounts
+        [HttpGet]
+        public ActionResult<AccountDTO> CheckUserNameExist([FromQuery] string Username)
+        {
+            var account = _accountsRepository.CheckUserNameExist(Username);
 
-        //    return CreatedAtAction("GetAccount", new { id = account.Username }, account);
-        //}
+            return Ok(_mapper.Map<AccountDTO>(account));
+        }
 
-        //// DELETE: api/Accounts/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteAccount(string id)
-        //{
-        //    var account = await _context.Accounts.FindAsync(id);
-        //    if (account == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // Anh Dung
+        // Post: api/accounts
+        [HttpPost]
+        public ActionResult<AccountDTO> AddNewAccount([FromBody] Account account)
+        {
+            _accountsRepository.AddNewAccount(account);
 
-        //    _context.Accounts.Remove(account);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool AccountExists(string id)
-        //{
-        //    return _context.Accounts.Any(e => e.Username == id);
-        //}
+            return Created("https://localhost:44300/api/authenticate", _mapper.Map<AccountDTO>(account));
+        }
     }
 }

@@ -14,7 +14,6 @@ using Let_Quiz.Models;
 
 namespace Let_Quiz.Controllers
 {
-    [Authorize]
     [Route("api/quizzes")]
     [ApiController]
     public class QuizzesController : ControllerBase
@@ -30,7 +29,9 @@ namespace Let_Quiz.Controllers
             _mapper = mapper;
         }
 
+        // Anh Dung
         // GET: api/quizzes
+        [Authorize(Roles = "False")]
         [HttpGet]
         public ActionResult<IEnumerable<Quiz>> GetQuizzes()
         {

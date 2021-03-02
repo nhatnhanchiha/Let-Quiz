@@ -23,8 +23,10 @@ namespace Let_Quiz.Services
             {
                 QuizId = q.QuizId,
                 Name = q.Name,
+                Password = q.Password,
                 CreateDate = q.CreateDate,
                 Duration = q.Duration,
+                MaxPoint = q.MaxPoint,
                 Account = new Account
                 {
                     Name = q.Account.Name

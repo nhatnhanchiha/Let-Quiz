@@ -11,7 +11,7 @@ namespace LetQuiz.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Result> Results { get; set; }
-        public DbSet<ResultDetail> ResultDetails { get; set; }
+        public DbSet<ResultDetail> ResultDetail { get; set; }
 
         public LetQuizContext(DbContextOptions<LetQuizContext> options) : base(options)
         {

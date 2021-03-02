@@ -1,0 +1,50 @@
+<div class="container">
+    <form class="mx-auto mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
+        <p class="h3 text-center">Register</p>
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" [(ngModel)]="newAccount.name"
+                    required maxlength="100"
+                    placeholder="Name">
+        </div>
+
+        <div class="form-group">
+            <label>User Name</label>
+            <input type="text" name="username" class="form-control" [(ngModel)]="newAccount.username"
+                    required maxlength="50"
+                    placeholder="User name"
+                    (blur)="onblur()">
+        </div>
+
+        <div class="form-group">
+            <p class="text-danger">{{ msgErrorUserName }}</p>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" [(ngModel)]="newAccount.password"
+                    required maxlength="30"
+                    placeholder="Password">
+        </div>
+
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="confirmPassword"
+                    required maxlength="30"
+                    placeholder="Confirm">
+        </div>
+
+        <div class="form-group">
+            <p class="text-danger">{{ msgErrorConfirm }}</p>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Register</button>
+        </div>
+
+        <div class="form-group">
+            <a [routerLink]="['/login']" class="nav-link text-center">I already have an account, Sign in now</a>
+        </div>
+    </form>
+</div>

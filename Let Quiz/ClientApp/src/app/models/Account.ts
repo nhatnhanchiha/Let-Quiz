@@ -5,4 +5,5 @@ export class Account {
     password: string;
     name: string;
     isTeacher: boolean;
+    status: boolean;
 }
