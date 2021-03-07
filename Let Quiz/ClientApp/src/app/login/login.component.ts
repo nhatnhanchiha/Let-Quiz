@@ -33,7 +33,7 @@ export class LoginComponent {
                         sessionStorage.setItem('account', JSON.stringify(account));
 
                         if(account.isTeacher == true) {
-                            // router den component teacher cua may ong
+                            this.router.navigate(['teacher-index']);
                         } else {
                             this.router.navigate(['student-index']);
                         }

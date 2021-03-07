@@ -2,6 +2,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuizComponent } from './quiz/quiz.component';
 import { RegisterComponent } from './register/register.component';
 import { StudentIndexGuard } from './student/student-index.guard';
+import { TeacherIndexGuard } from './teacher/teacher-index.guard';
+import {TeacherIndexComponent } from './teacher/teacher-index.component';
 import { StudentIndexComponent } from './student/student-index.component';
 import { LoginComponent } from './login/login.component';
 import {BrowserModule} from '@angular/platform-browser';
@@ -18,7 +20,8 @@ import {AppComponent} from './app.component';
         LoginComponent,
         StudentIndexComponent,
         RegisterComponent,
-        QuizComponent
+        QuizComponent,
+        TeacherIndexComponent
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -34,7 +37,12 @@ import {AppComponent} from './app.component';
                 component: StudentIndexComponent
             },
             { path: 'register', component: RegisterComponent },
-            { path: 'quiz', component: QuizComponent }
+            { path: 'quiz', component: QuizComponent },
+            {
+                path: 'teacher-index',
+                canActivate: [TeacherIndexGuard],
+                component: TeacherIndexComponent
+            }
         ])
     ],
     providers: [],
