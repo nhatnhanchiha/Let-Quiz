@@ -2,24 +2,38 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
         <div class="container">
             <a class="navbar-brand" routerLink="/">Let Quiz</a>
-            <ul class="navbar-nav mr-auto">
-                <ng-container *ngIf="currentAccount$ | async">
+            <ng-container *ngIf="(currentAccount$ | async) as account">
+                <ul class="navbar-nav mr-auto">
+                    <ng-container *ngIf="!account.isTeacher">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/student-index" routerLinkActive="active">Quizess</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/student-histories-quiz" routerLinkActive="active">History</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="account.isTeacher">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/teacher-index" routerLinkActive="active">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/student-index" routerLinkActive="active">Manage Question</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/student-histories-quiz" routerLinkActive="active">Manage Quiz</a>
+                        </li>
+                    </ng-container>
+                </ul>
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/student-index" routerLinkActive="active">Quizess</a>
+                        <a class="nav-link" routerLink="/student/profile">{{account.name}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/student-histories-quiz" routerLinkActive="active">History</a>
+                        <a class="nav-link" (click)="logout()" style="cursor: pointer">Log out</a>
                     </li>
-                </ng-container>
-            </ul>
-            <ul class="navbar-nav ml-auto" *ngIf="(currentAccount$ | async) as account">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/student/profile">{{account.name}}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" (click)="logout()" style="cursor: pointer">Log out</a>
-                </li>
-            </ul>
+                </ul>
+            </ng-container>
+
         </div>
     </nav>
 </header>
