@@ -1,0 +1,25 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+        <div class="container">
+            <a class="navbar-brand" routerLink="/">Let Quiz</a>
+            <ul class="navbar-nav mr-auto">
+                <ng-container *ngIf="currentAccount$ | async">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/student-index" routerLinkActive="active">Quizess</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/student-histories-quiz" routerLinkActive="active">History</a>
+                    </li>
+                </ng-container>
+            </ul>
+            <ul class="navbar-nav ml-auto" *ngIf="(currentAccount$ | async) as account">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/student/profile">{{account.name}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()" style="cursor: pointer">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
