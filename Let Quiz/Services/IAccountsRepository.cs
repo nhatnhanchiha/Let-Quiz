@@ -12,5 +12,7 @@ namespace Let_Quiz.Services
         Account GetAccount(string userName);
         Account CheckUserNameExist(string userName);
         bool AddNewAccount(Account account);
+        void Update(Account account);
+        bool SaveChanges();
     }
 }

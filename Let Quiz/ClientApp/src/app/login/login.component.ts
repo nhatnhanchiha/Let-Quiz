@@ -1,7 +1,7 @@
-import { AccountService } from './../services/AccountService';
-import { Account } from './../models/Account';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {AccountService} from './../services/AccountService';
+import {Account} from './../models/Account';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'login',
@@ -9,14 +9,26 @@ import { Router } from '@angular/router';
     styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+    ngOnInit(): void {
+        this.accountService.currentAccount$.subscribe(account => {
+            if (account) {
+                if (account.isTeacher == true) {
+                    this.router.navigate(['teacher-index']);
+                } else {
+                    this.router.navigate(['student-index']);
+                }
+            }
+        });
+    }
 
-    constructor(private accountService: AccountService, private router: Router) { }
+    constructor(private accountService: AccountService, private router: Router) {
+    }
 
     acc: Account = {
-        username: "",
-        password: "",
-        name: "",
+        username: '',
+        password: '',
+        name: '',
         isTeacher: true,
         status: true
     };
@@ -27,20 +39,19 @@ export class LoginComponent {
         this.accountService.getToken(this.acc).subscribe(
             (data: any) => {
                 sessionStorage.setItem('token', data);
-                
+
                 this.accountService.getAccount(this.acc.username, data).subscribe(
                     (account: Account) => {
                         sessionStorage.setItem('account', JSON.stringify(account));
-
-                        if(account.isTeacher == true) {
+                        this.accountService.setCurrentAccount(account);
+                        if (account.isTeacher == true) {
                             this.router.navigate(['teacher-index']);
                         } else {
                             this.router.navigate(['student-index']);
                         }
-                });
+                    });
             },
-            (err: any) => this.errorLogin = "Invalid username or password"
-            
+            (err: any) => this.errorLogin = 'Invalid username or password'
         );
     }
 }

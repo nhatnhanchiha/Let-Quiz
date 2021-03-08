@@ -1,10 +1,4 @@
 <div class="row">
-    <nav class="nav flex-column navbar navbar-light col-3 justify-content-start">
-        <p class="h2 text-center navbar-brand">Welcome: {{ account.name }}</p>
-        <a href="#" class="nav-link">Home</a>
-        <a class="nav-link" (click)="logout()">Log out</a>
-    </nav>
-    
     <div class="col-9 mt-5">
         <div class="row justify-content-between mx-5">
             <div class="card col-5 mb-4" *ngFor='let quiz of quizzes'>

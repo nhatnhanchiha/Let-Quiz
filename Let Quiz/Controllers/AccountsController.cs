@@ -59,5 +59,34 @@ namespace Let_Quiz.Controllers
 
             return Created("https://localhost:44300/api/authenticate", _mapper.Map<AccountDTO>(account));
         }
+
+        [Authorize(Roles = "False")]
+        [HttpGet("student/profile")]
+        public ActionResult<AccountDTO> GetProfile()
+        {
+            var username = User.FindFirst("UserName")?.Value;
+            var account = _accountsRepository.GetAccount(username);
+            return Ok(_mapper.Map<AccountDTO>(account));
+        }
+
+        [Authorize(Roles = "False")]
+        [HttpPut("student/update-profile")]
+        public ActionResult UpdateProfile(UpdateStudentProfileDTO dto)
+        {
+            var username = User.FindFirst("UserName")?.Value;
+            var account = _accountsRepository.CheckLogin(username, dto.Password);
+            if (account == null)
+            {
+                return BadRequest();
+            }
+
+            account.Name = dto.Name;
+
+            _accountsRepository.Update(account);
+
+            _accountsRepository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

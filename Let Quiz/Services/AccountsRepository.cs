@@ -62,5 +62,15 @@ namespace Let_Quiz.Services
             _letQuizContext.Accounts.Add(account);
             return _letQuizContext.SaveChanges() > 0;
         }
+
+        public void Update(Account account)
+        {
+            _letQuizContext.Accounts.Update(account);
+        }
+
+        public bool SaveChanges()
+        {
+            return _letQuizContext.SaveChanges() > 0;
+        }
     }
 }
