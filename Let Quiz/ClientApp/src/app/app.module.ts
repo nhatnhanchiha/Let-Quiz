@@ -47,10 +47,10 @@ import {StudentHistoryDetailComponent} from './student/student-history-detail/st
                     {path: 'student-index', component: StudentIndexComponent},
                     {path: 'student/profile', component: StudentProfileComponent},
                     {path: 'quiz', component: QuizComponent},
+                    {path: 'student-histories-quiz/:resultId', component: StudentHistoryDetailComponent},
+                    {path: 'student-histories-quiz', component: StudentHistoriesComponent},
                 ]
             },
-            {path: 'student-histories-quiz/:resultId', component: StudentHistoryDetailComponent},
-            {path: 'student-histories-quiz', component: StudentHistoriesComponent},
             {path: 'register', component: RegisterComponent},
             {
                 path: 'teacher-index',
