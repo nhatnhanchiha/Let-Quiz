@@ -21,4 +21,14 @@ export class QuizService {
             })
         });
     }
+
+    getQuiz(id : number) {
+        const token = sessionStorage.getItem('token');
+        return this.http.get<Quiz>(this.url + '/student/quiz/' + id, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
 }

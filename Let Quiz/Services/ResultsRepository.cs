@@ -6,16 +6,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Let_Quiz.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Let_Quiz.Services
 {
     public class ResultsRepository : IResultsRepository
     {
         private readonly LetQuizContext _letQuizContext;
+        private readonly IMapper _mapper;
 
-        public ResultsRepository(LetQuizContext letQuizContext)
+        public ResultsRepository(LetQuizContext letQuizContext, IMapper mapper)
         {
             _letQuizContext = letQuizContext;
+            _mapper = mapper;
         }
 
         public bool AddResult(QuizAnswerDTO quizAnswer)
@@ -52,6 +58,33 @@ namespace Let_Quiz.Services
             }
 
             return false;
+        }
+
+        public PagedList<ResultDTO> GetResultsByUserName(string username, ResultParams resultParams)
+        {
+            var query = _letQuizContext.Results
+                .Where(r => r.AccountUsername == username)
+                .Include(r => r.Quiz)
+                .ProjectTo<ResultDTO>(_mapper.ConfigurationProvider)
+                .OrderByDescending(r => r.FinishTime)
+                .AsNoTracking();
+            return PagedList<ResultDTO>.Create(query, resultParams.PageNumber, resultParams.PageSize);
+        }
+
+        public ResultDTO GetResultWithFullDetail(string username, int id)
+        {
+            var now = DateTime.Now;
+            return _letQuizContext.Results
+                .Where(r => r.AccountUsername == username)
+                .Where(r => r.ResultId == id)
+                .Where(r => r.FinishTime < now)
+                .Include(r => r.Answers)
+                .Include(r => r.Quiz)
+                .ThenInclude(q => q.Questions)
+                .ThenInclude(q => q.Answers)
+                .ProjectTo<ResultDTO>(_mapper.ConfigurationProvider)
+                .AsNoTracking()
+                .FirstOrDefault();
         }
 
         private float CalculatePoint(int quizID, IEnumerable<AnswerSelectDTO> answerSelects)

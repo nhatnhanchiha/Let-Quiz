@@ -1,0 +1,27 @@
+<h1>Quid Id: {{result?.quizId}}</h1>
+<h1>Quiz Name: {{result?.nameOfQuiz}}</h1>
+<h2>Start Time: {{result?.startTime}}</h2>
+<h2>Finish Time: {{result?.finishTime}}</h2>
+<h2>Your Point: {{result?.point}}</h2>
+<table class="table table-sm table-bordered">
+    <thead>
+    <tr>
+        <th scope="col"><h4 class="font-weight-bold">Num</h4></th>
+        <th scope="col"><h4 class="font-weight-bold">Detail</h4></th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let question of result?.quiz?.questionDtos; let indexOfElement = index;">
+        <tr>
+            <td><h2>{{indexOfElement + 1}}</h2></td>
+            <td>
+                <h5>Content: {{question?.content}}</h5>
+                <h6>Your answer:</h6>
+                <ng-container *ngFor="let answer of question?.answers">
+                    <h6 class="{{isRightClass(answer)}}"><input type="radio" disabled [checked]="isChoosed(answer.answerId)"> {{answer?.content}}</h6>
+                </ng-container>
+            </td>
+        </tr>
+    </ng-container>
+    </tbody>
+</table>

@@ -1,7 +1,6 @@
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {QuizComponent} from './quiz/quiz.component';
 import {RegisterComponent} from './register/register.component';
-import {StudentIndexGuard} from './student/student-index.guard';
 import {TeacherIndexGuard} from './teacher/teacher-index.guard';
 import {TeacherIndexComponent} from './teacher/teacher-index.component';
 import {StudentIndexComponent} from './student/student-index.component';
@@ -16,6 +15,8 @@ import {AppComponent} from './app.component';
 import {StudentProfileComponent} from './student/student-profile/student-profile.component';
 import {StudentNavComponent} from './student/student-nav/student-nav.component';
 import {StudentAuthGuard} from './_guard/student-auth.guard';
+import {StudentHistoriesComponent} from './student/student-histories/student-histories.component';
+import {StudentHistoryDetailComponent} from './student/student-history-detail/student-history-detail.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,9 @@ import {StudentAuthGuard} from './_guard/student-auth.guard';
         QuizComponent,
         TeacherIndexComponent,
         StudentProfileComponent,
-        StudentNavComponent
+        StudentNavComponent,
+        StudentHistoriesComponent,
+        StudentHistoryDetailComponent,
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -46,6 +49,8 @@ import {StudentAuthGuard} from './_guard/student-auth.guard';
                     {path: 'quiz', component: QuizComponent},
                 ]
             },
+            {path: 'student-histories-quiz/:resultId', component: StudentHistoryDetailComponent},
+            {path: 'student-histories-quiz', component: StudentHistoriesComponent},
             {path: 'register', component: RegisterComponent},
             {
                 path: 'teacher-index',
