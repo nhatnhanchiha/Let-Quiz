@@ -15,6 +15,8 @@ export class AppComponent implements OnInit{
         const account = JSON.parse(sessionStorage.getItem('account'));
         if (account) {
             this.accountService.setCurrentAccount(account);
+        } else {
+            this.accountService.setCurrentAccount(null);
         }
     }
 }
