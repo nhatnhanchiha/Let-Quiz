@@ -3,6 +3,7 @@ import {Result} from '../../models/result';
 import {ResultService} from '../../services/result.service';
 import {ActivatedRoute} from '@angular/router';
 import {Answer} from '../../models/Answer';
+import {Question} from '../../models/Question';
 
 @Component({
     selector: 'app-student-history-detail',
@@ -42,5 +43,10 @@ export class StudentHistoryDetailComponent implements OnInit, AfterContentChecke
         this.resultService.getResultDetail(this.resultId).subscribe(response => {
             this.result = response;
         }, error => console.log(error));
+    }
+
+    isRightChoose(question: Question) {
+        const rightAnswer = question.answers.find(a => a.isCorrect);
+        return this.result.answerDtos.find(a => a.answerId == rightAnswer.answerId);
     }
 }
