@@ -1,3 +1,4 @@
+import { QuizPaging } from './../models/QuizPaging';
 import { Quiz } from './../models/Quiz';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -13,8 +14,17 @@ export class QuizService {
 
     constructor(private http: HttpClient) {}
 
-    getQuizzes(token: string) : Observable<Quiz[]> {
-        return this.http.get<Quiz[]>(this.url, {
+    getQuizzes(token: string, searchValue:string, currentPage: number, maxRecord: number) : Observable<QuizPaging> {
+        return this.http.get<QuizPaging>(`${this.url}?searchValue=${searchValue}&currentPage=${currentPage}&maxRecord=${maxRecord}`, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
+
+    changePage(token: string, urlPage: string) : Observable<QuizPaging> {
+        return this.http.get<QuizPaging>(urlPage, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

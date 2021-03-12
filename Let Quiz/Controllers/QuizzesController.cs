@@ -32,12 +32,39 @@ namespace Let_Quiz.Controllers
         // Anh Dung
         // GET: api/quizzes
         [Authorize(Roles = "False")]
-        [HttpGet]
-        public ActionResult<IEnumerable<Quiz>> GetQuizzes()
+        [HttpGet(Name = "getQuizzes")]
+        public ActionResult<IEnumerable<QuizPagingDTO>> GetQuizzes([FromQuery] PageDTO page)
         {
-            var quizzes = _quizzesRepository.GetQuizzes();
+            if (page == null || page.CurrentPage <= 0 || page.MaxRecord <= 0)
+            {
+                return BadRequest();
+            }
 
-            return Ok(_mapper.Map<IEnumerable<QuizDTO>>(quizzes));
+            if (page.SearchValue == null)
+            {
+                page.SearchValue = string.Empty;
+            }
+
+            var quizzes = _quizzesRepository.GetQuizzes(page);
+
+            var quizDTO = _mapper.Map<IEnumerable<QuizDTO>>(quizzes);
+
+            int maxPage = (int)Math.Ceiling(_quizzesRepository.GetTotalRecord(page) * 1.0 / page.MaxRecord);
+
+            string url = Url.Link("getQuizzes", null);
+
+            string nextPage = (page.CurrentPage + 1) > maxPage ? null : $"{url}?SearchValue={page.SearchValue}&CurrentPage={page.CurrentPage + 1}&MaxRecord={page.MaxRecord}";
+            string previousPage = (page.CurrentPage - 1) < 1 ? null : $"{url}?SearchValue={page.SearchValue}&CurrentPage={page.CurrentPage - 1}&MaxRecord={page.MaxRecord}";
+
+            return Ok(new QuizPagingDTO
+            {
+                SearchValue = page.SearchValue,
+                CurrentPage = page.CurrentPage,
+                MaxPage = maxPage,
+                NextPage = nextPage,
+                PreviousPage = previousPage,
+                Quizzes = quizDTO
+            });
         }
 
         //// GET: api/Quizzes/5

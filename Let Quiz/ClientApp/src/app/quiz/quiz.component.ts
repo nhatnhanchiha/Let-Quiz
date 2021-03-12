@@ -14,6 +14,7 @@ export class QuizComponent implements OnInit {
 
     questions: Question[];
     private answerSelect: AnswerSelect[] = new Array();
+    private startTimeStr: string;
 
     constructor(private questionService: QuestionService, private quizAnswerService: QuizAnswerService) { }
 
@@ -30,6 +31,9 @@ export class QuizComponent implements OnInit {
                 })
             }
         );
+
+        let today = new Date();
+        this.startTimeStr = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     }
 
     onSelectAnswer(quesID: number, ansID: number) {
@@ -50,10 +54,15 @@ export class QuizComponent implements OnInit {
         let account: Account = JSON.parse(sessionStorage.getItem('account'));
         let quizID = +sessionStorage.getItem("quizID");
 
+        let today = new Date();
+        let finishTimeStr = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
         let quizAnswer: QuizAnswer = {
             username: account.username,
             quizId: quizID,
-            answerSelect: this.answerSelect
+            answerSelect: this.answerSelect,
+            startTime: this.startTimeStr,
+            finishTime: finishTimeStr
         };
 
         this.quizAnswerService.addResult(quizAnswer, token).subscribe(

@@ -1,5 +1,15 @@
-<div class="row">
-    <div class="col-9 mt-5">
+<div class="container">
+    <form (ngSubmit)="onSeach()">
+        <div class="form-group">
+            <input type="text" name="searchValue" class="form-control" placeholder="Search..." [(ngModel)]="searchValue">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-outline-primary">Search</button>
+        </div>
+    </form>
+
+    <div class="mt-5">
         <div class="row justify-content-between mx-5">
             <div class="card col-5 mb-4" *ngFor='let quiz of quizzes'>
                 <div class="card-header">{{ quiz.name }}</div>
@@ -14,6 +24,20 @@
             </div>
         </div>
     </div>
+
+    <div class="mt-5" *ngIf="quizzes == null || quizzes.length == 0">No Quiz Available</div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+            <a class="page-link" (click)="priviousPage()">Previous</a>
+            </li>
+            <li class="page-item"><div class="page-link">{{ quizPaging.currentPage }} / {{ quizPaging.maxPage }}</div></li>
+            <li class="page-item">
+            <a class="page-link" (click)="nextPage()">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
