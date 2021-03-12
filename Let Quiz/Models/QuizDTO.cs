@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LetQuiz.Domain;
 
 namespace Let_Quiz.Models
 {
@@ -15,5 +16,6 @@ namespace Let_Quiz.Models
         public float MaxPoint { get; set; }
         public bool IsExpire { get; set; }
         public string TeacherName { get; set; }
+        public List<QuestionDTO> QuestionDtos { get; set; }
     }
 }

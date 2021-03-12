@@ -1,4 +1,4 @@
-import {Account} from './../models/Account';
+import {Account} from '../models/Account';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, ReplaySubject} from 'rxjs';

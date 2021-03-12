@@ -1,8 +1,6 @@
 ﻿using LetQuiz.Domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Let_Quiz.Models;
 
 namespace Let_Quiz.Services
 {

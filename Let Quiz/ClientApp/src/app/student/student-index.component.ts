@@ -17,15 +17,14 @@ export class StudentIndexComponent implements OnInit {
     password: string;
     errPassword: string;
     private quiz: Quiz;
-    
-    constructor(private quizService: QuizService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) { 
+
+    constructor(private quizService: QuizService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
         config.backdrop = 'static';
         config.keyboard = false;
     }
 
     ngOnInit() {
         let token: string = sessionStorage.getItem('token');
-
         this.quizService.getQuizzes(token).subscribe(
             (data: Quiz[]) => this.quizzes = data,
             (err :any) => this.router.navigate(['/login'])

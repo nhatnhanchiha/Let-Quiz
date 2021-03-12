@@ -13,14 +13,14 @@ import { Component, OnInit } from '@angular/core';
 export class QuizComponent implements OnInit {
 
     questions: Question[];
-    private answerSelect: AnswerSelect[] = new Array();
+    private answerSelect: AnswerSelect[] = [];
 
     constructor(private questionService: QuestionService, private quizAnswerService: QuizAnswerService) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         let token: string = sessionStorage.getItem('token');
         let quizID = sessionStorage.getItem("quizID");
-        
+
         this.questionService.getQuestionsByQuizID(quizID, token).subscribe(
             (data: Question[]) => {
                 this.questions = data;
