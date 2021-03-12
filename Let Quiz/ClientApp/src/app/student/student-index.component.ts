@@ -27,7 +27,8 @@ export class StudentIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
 
         this.quizService.getQuizzes(token).subscribe(
-            (data: Quiz[]) => this.quizzes = data
+            (data: Quiz[]) => this.quizzes = data,
+            (err :any) => this.router.navigate(['/login'])
         );
     }
 

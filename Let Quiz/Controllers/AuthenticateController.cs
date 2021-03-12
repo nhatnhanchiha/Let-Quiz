@@ -57,7 +57,7 @@ namespace Let_Quiz.Controllers
                             _configuration["JWT:Issure"],
                             _configuration["JWT:Audience"],
                             claims,
-                            expires: DateTime.UtcNow.AddMinutes(3),
+                            expires: DateTime.UtcNow.AddHours(12),
                             signingCredentials: signIn
                         );
 
