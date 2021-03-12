@@ -32,12 +32,37 @@ namespace Let_Quiz.Controllers
         // Anh Dung
         // GET: api/quizzes
         [Authorize(Roles = "False")]
-        [HttpGet]
-        public ActionResult<IEnumerable<Quiz>> GetQuizzes()
+        [HttpGet(Name = "GetQuizzes")]
+        public ActionResult<IEnumerable<Quiz>> GetQuizzes([FromQuery] PageInfoDTO pageInfo)
         {
-            var quizzes = _quizzesRepository.GetQuizzes();
+            if (pageInfo == null || pageInfo.CurrentPage <= 0 || pageInfo.MaxRecord <= 0)
+            {
+                return BadRequest();
+            }
 
-            return Ok(_mapper.Map<IEnumerable<QuizDTO>>(quizzes));
+            if (pageInfo.SearchValue == null)
+            {
+                pageInfo.SearchValue = "";
+            }
+
+            var quizzes = _quizzesRepository.GetQuizzes(pageInfo);
+            var quizzesDTO = _mapper.Map<IEnumerable<QuizDTO>>(quizzes);
+
+            int maxPage = _quizzesRepository.GetMaxPage(pageInfo);
+
+            string url = Url.Link("GetQuizzes", null);
+
+            var pagingQuiz = new PagingQuizDTO
+            {
+                SearchValue = pageInfo.SearchValue,
+                CurrentPage = pageInfo.CurrentPage,
+                MaxPage = maxPage,
+                NextPage = pageInfo.CurrentPage >= maxPage ? null : $"{url}?SearchValue={pageInfo.SearchValue}&CurrentPage={pageInfo.CurrentPage + 1}&MaxRecord={pageInfo.MaxRecord}",
+                PreviousPage = pageInfo.CurrentPage <= 1 ? null : $"{url}?SearchValue={pageInfo.SearchValue}&CurrentPage={pageInfo.CurrentPage - 1}&MaxRecord={pageInfo.MaxRecord}",
+                Quizzes = quizzesDTO,
+            };
+
+            return Ok(pagingQuiz);
         }
 
         //// GET: api/Quizzes/5

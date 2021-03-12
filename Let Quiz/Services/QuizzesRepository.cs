@@ -23,8 +23,10 @@ namespace Let_Quiz.Services
             _resultsRepository = resultsRepository;
         }
 
-        public IEnumerable<Quiz> GetQuizzes()
+        public IEnumerable<Quiz> GetQuizzes(PageInfoDTO pageInfo)
         {
+            int offset = (pageInfo.CurrentPage - 1) * pageInfo.MaxRecord;
+
             var quizzes = _letQuizContext.Quizzes.Select(q => new Quiz
             {
                 QuizId = q.QuizId,
@@ -38,10 +40,16 @@ namespace Let_Quiz.Services
                     Name = q.Account.Name
                 },
                 IsExpire = q.IsExpire
-            }).Where(q => q.IsExpire == false).ToList();
+            }).Where(q => q.IsExpire == false && q.Name.Contains(pageInfo.SearchValue)).Skip(offset).Take(pageInfo.MaxRecord).ToList();
 
             return quizzes;
         }
 
+        public int GetMaxPage(PageInfoDTO pageInfo)
+        {
+            var numRecord = _letQuizContext.Quizzes.Where(q => q.IsExpire == false && q.Name.Contains(pageInfo.SearchValue)).Count();
+
+            return (int)Math.Ceiling((numRecord * 1.0) / pageInfo.MaxRecord);
+        }
     }
 }

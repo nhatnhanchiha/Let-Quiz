@@ -6,6 +6,7 @@ namespace Let_Quiz.Services
 {
     public interface IQuizzesRepository
     {
-        IEnumerable<Quiz> GetQuizzes();
+        IEnumerable<Quiz> GetQuizzes(PageInfoDTO pageInfo);
+        int GetMaxPage(PageInfoDTO pageInfo);
     }
 }
