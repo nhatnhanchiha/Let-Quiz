@@ -17,10 +17,8 @@ namespace Let_Quiz.Services
             _letQuizContext = letQuizContext;
         }
 
-        public IEnumerable<Quiz> GetQuizzes(PageDTO page)
+        public IEnumerable<Quiz> GetQuizzes()
         {
-            int skip = (page.CurrentPage - 1) * page.MaxRecord;
-
             var quizzes = _letQuizContext.Quizzes.Select(q => new Quiz
             {
                 QuizId = q.QuizId,
@@ -34,14 +32,9 @@ namespace Let_Quiz.Services
                     Name = q.Account.Name
                 },
                 IsExpire = q.IsExpire
-            }).Where(q => q.IsExpire == false && q.Name.Contains(page.SearchValue)).Skip(skip).Take(page.MaxRecord).ToList();
+            }).Where(q => q.IsExpire == false).ToList();
 
             return quizzes;
-        }
-
-        public int GetTotalRecord(PageDTO page)
-        {
-            return _letQuizContext.Quizzes.Where(q => q.IsExpire == false && q.Name.Contains(page.SearchValue)).Count();
         }
     }
 }

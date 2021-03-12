@@ -1,4 +1,3 @@
-import { QuizPaging } from './../models/QuizPaging';
 import { Router } from '@angular/router';
 import { Quiz } from '../models/Quiz';
 import { QuizService } from '../services/QuizService';
@@ -14,14 +13,10 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 export class StudentIndexComponent implements OnInit {
 
     quizzes: Quiz[];
-    quizPaging: QuizPaging;
-    searchValue = "";
     account: Account = JSON.parse(sessionStorage.getItem('account'));
     password: string;
     errPassword: string;
-
     private quiz: Quiz;
-    private maxRecord = 2;
     
     constructor(private quizService: QuizService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) { 
         config.backdrop = 'static';
@@ -31,13 +26,8 @@ export class StudentIndexComponent implements OnInit {
     ngOnInit() {
         let token: string = sessionStorage.getItem('token');
 
-        let currentPage = 1;
-
-        this.quizService.getQuizzes(token, this.searchValue, currentPage, this.maxRecord).subscribe(
-            (data: QuizPaging) => {
-                this.quizPaging = data;
-                this.quizzes = data.quizzes;
-            }
+        this.quizService.getQuizzes(token).subscribe(
+            (data: Quiz[]) => this.quizzes = data
         );
     }
 
@@ -62,45 +52,6 @@ export class StudentIndexComponent implements OnInit {
             this.modalService.dismissAll();
         } else {
             this.errPassword = "Incorrect password";
-        }
-    }
-
-    onSeach() {
-        let token: string = sessionStorage.getItem('token');
-
-        let currentPage = 1;
-
-        this.quizService.getQuizzes(token, this.searchValue, currentPage, this.maxRecord).subscribe(
-            (data: QuizPaging) => {
-                this.quizPaging = data;
-                this.quizzes = data.quizzes;
-            }
-        );
-    }
-
-    nextPage() {
-        let token: string = sessionStorage.getItem('token');
-
-        if(this.quizPaging.nextPage != null) {
-            this.quizService.changePage(token, this.quizPaging.nextPage).subscribe(
-                (data: QuizPaging) => {
-                    this.quizPaging = data;
-                    this.quizzes = data.quizzes;
-                }
-            );
-        }
-    }
-
-    priviousPage() {
-        let token: string = sessionStorage.getItem('token');
-
-        if(this.quizPaging.previousPage != null) {
-            this.quizService.changePage(token, this.quizPaging.previousPage).subscribe(
-                (data: QuizPaging) => {
-                    this.quizPaging = data;
-                    this.quizzes = data.quizzes;
-                }
-            );
         }
     }
 }

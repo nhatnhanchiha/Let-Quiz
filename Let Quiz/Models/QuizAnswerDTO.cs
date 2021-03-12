@@ -10,7 +10,5 @@ namespace Let_Quiz.Models
         public int QuizId { get; set; }
         public string Username { get; set; }
         public IEnumerable<AnswerSelectDTO> AnswerSelect { get; set; }
-        public string StartTime { get; set; }
-        public string FinishTime { get; set; }
     }
 }

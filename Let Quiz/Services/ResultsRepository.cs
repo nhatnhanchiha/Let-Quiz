@@ -27,8 +27,8 @@ namespace Let_Quiz.Services
                 QuizId = quizAnswer.QuizId,
                 AccountUsername = quizAnswer.Username,
                 Point = point,
-                StartTime = DateTime.Parse(quizAnswer.StartTime),
-                FinishTime = DateTime.Parse(quizAnswer.FinishTime)
+                StartTime = DateTime.Now,
+                FinishTime = DateTime.Now,
             };
 
             _letQuizContext.Results.Add(result);
