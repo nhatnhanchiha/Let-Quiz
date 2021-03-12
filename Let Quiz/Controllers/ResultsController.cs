@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Let_Quiz.Extenstions;
+using Let_Quiz.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +29,7 @@ namespace Let_Quiz.Controllers
         }
 
         // Anh Dung
-        // Post: 
+        // Post:
         [Authorize(Roles = "False")]
         [HttpPost]
         public ActionResult AddResultQuiz([FromBody] QuizAnswerDTO quizAnswer)
@@ -38,6 +40,27 @@ namespace Let_Quiz.Controllers
             }
 
             return BadRequest();
+        }
+
+        [Authorize(Roles = "False")]
+        [HttpGet("student/results")]
+        public ActionResult<IEnumerable<ResultDTO>> GetResultList([FromQuery]ResultParams resultParams)
+        {
+            var username = User.FindFirst("UserName")?.Value;
+            var results = _resultsRepository.GetResultsByUserName(username, resultParams);
+
+            Response.AddPagingNationHeader(results.CurrentPage, results.PageSize, results.TotalCount, results.TotalPages);
+
+            return Ok(results);
+        }
+
+        [Authorize(Roles = "False")]
+        [HttpGet("student/results/{resultId}")]
+        public ActionResult<ResultDTO> GetDetailOfQuiz(int resultId)
+        {
+            var username = User.FindFirst("Username")?.Value;
+            var result = _resultsRepository.GetResultWithFullDetail(username, resultId);
+            return Ok(result);
         }
 
         //// GET: api/Results

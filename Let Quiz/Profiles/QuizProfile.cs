@@ -13,7 +13,10 @@ namespace Let_Quiz.Profiles
         public QuizProfile()
         {
             CreateMap<Quiz, QuizDTO>().ForMember(quizDTO => quizDTO.TeacherName,
-                                                 opt => opt.MapFrom(src => src.Account.Name));
+                opt => opt.MapFrom(src => src.Account.Name))
+                .ForMember(des => des.QuestionDtos,
+                    opt => opt.MapFrom(
+                        src => src.Questions));
         }
     }
 }

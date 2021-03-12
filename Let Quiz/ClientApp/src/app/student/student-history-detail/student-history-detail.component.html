@@ -1,0 +1,42 @@
+<div class="card mb-3 w-75">
+    <div class="card-body">
+        <h5 class="card-title"><span class="text-danger">{{result?.nameOfQuiz}}</span> - Id: <span class="text-danger">{{result?.quizId}}</span></h5>
+        <p class="card-text">Start Time: <span class="text-danger">{{result?.startTime}}</span></p>
+        <p class="card-text">Finish Time: <span class="text-danger">{{result?.finishTime}}</span></p>
+        <p class="card-text">Your Point: <span class="text-danger">{{result?.point}}</span></p>
+    </div>
+</div>
+<table class="table table-sm table-bordered">
+    <thead>
+    <tr class="text-center">
+        <th scope="col"><h4 class="font-weight-bold">Num</h4></th>
+        <th scope="col"><h4 class="font-weight-bold">Detail</h4></th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let question of result?.quiz?.questionDtos; let indexOfElement = index;">
+        <tr>
+            <td>
+                <div class="card text-white text-center {{isRightChoose(question) ? 'bg-success' : 'bg-danger'}} w-30">
+                    <div class="card-body">
+                        <h2>{{indexOfElement + 1}}</h2>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Content: {{question?.content}}</h5>
+                        <h6>Your answer:</h6>
+                        <ng-container *ngFor="let answer of question?.answers">
+                            <h6 class="{{isRightClass(answer)}}"><input type="radio" disabled
+                                                                        [checked]="isChoosed(answer.answerId)"> {{answer?.content}}
+                            </h6>
+                        </ng-container>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </ng-container>
+    </tbody>
+</table>

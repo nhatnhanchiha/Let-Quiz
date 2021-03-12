@@ -1,0 +1,34 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Quiz Id</th>
+        <th scope="col">Name Of Quiz</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">Finish Time</th>
+        <th scope="col">Point</th>
+        <th scope="col">View detail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let result of results">
+        <tr>
+            <th scope="row">{{result.resultId}}</th>
+            <td>{{result.quizId}}</td>
+            <td>{{result.nameOfQuiz}}</td>
+            <td>{{result.startTime}}</td>
+            <td>{{result.finishTime}}</td>
+            <td>{{result.point}}</td>
+            <td><a [routerLink]="['/student-histories-quiz', result.resultId]">View</a></td>
+        </tr>
+    </ng-container>
+    </tbody>
+</table>
+<div class="d-flex justify-content-center">
+    <ngb-pagination *ngIf="pagination != null"
+                    [(page)]="pagination.currentPage"
+                    [pageSize]="pagination.itemsPerPage"
+                    (pageChange)="pageChanged($event)"
+                    [boundaryLinks]="true"
+                    [collectionSize]="pagination.totalItems"></ngb-pagination>
+</div>
