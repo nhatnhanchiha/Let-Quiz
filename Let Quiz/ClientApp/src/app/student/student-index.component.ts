@@ -108,6 +108,7 @@ export class StudentIndexComponent implements OnInit {
         if(this.quiz.password === this.password) {
             this.errPassword = "";
             sessionStorage.setItem("quizID", this.quiz.quizId.toString());
+            sessionStorage.setItem("quiz", JSON.stringify(this.quiz));
             this.router.navigate(['/quiz']);
             this.modalService.dismissAll();
         } else {

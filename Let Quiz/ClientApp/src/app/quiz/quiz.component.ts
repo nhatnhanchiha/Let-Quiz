@@ -4,24 +4,34 @@ import { QuizAnswer } from './../models/QuizAnswer';
 import { AnswerSelect } from './../models/AnswerSelect';
 import { Question } from './../models/Question';
 import { QuestionService } from './../services/QuestionService';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Quiz } from '../models/Quiz';
 
 @Component({
     templateUrl: './quiz.component.html'
 })
 
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnDestroy {
 
     questions: Question[];
+    quiz: Quiz;
+    timeRemaining: string;
     private answerSelect: AnswerSelect[] = [];
+
+    private interval;
 
     private startTimeStr: string;
 
     constructor(private questionService: QuestionService, private quizAnswerService: QuizAnswerService) { }
 
+    ngOnDestroy(): void {
+        clearInterval(this.interval);
+    }
+
     ngOnInit() {
         let token: string = sessionStorage.getItem('token');
         let quizID = sessionStorage.getItem("quizID");
+        this.quiz = JSON.parse(sessionStorage.getItem("quiz"));
 
         this.questionService.getQuestionsByQuizID(quizID, token).subscribe(
             (data: Question[]) => {
@@ -35,6 +45,28 @@ export class QuizComponent implements OnInit {
 
         let today = new Date();
         this.startTimeStr = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() + ' ' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+        this.countDown();
+    }
+
+    countDown() {
+
+        let timer = (this.quiz.duration * 60);
+
+        this.interval = setInterval(() => {
+            let minutes = Math.floor(timer / 60);
+            let second = timer % 60;
+
+            let minutesStr = minutes < 10 ? `0${minutes}` : minutes;
+            let secondStr = second < 10 ? `0${second}` : second;
+
+            this.timeRemaining = `${minutesStr}:${secondStr}`;
+
+            if(--timer < 0) {
+                this.onSubmit();
+                clearInterval(this.interval);
+            }
+        }, 1000);
     }
 
     onSelectAnswer(quesID: number, ansID: number) {
@@ -69,5 +101,7 @@ export class QuizComponent implements OnInit {
         this.quizAnswerService.addResult(quizAnswer, token).subscribe(
             (data: QuizAnswer) => console.log(data)
         );
+
+        clearInterval(this.interval);
     }
 }

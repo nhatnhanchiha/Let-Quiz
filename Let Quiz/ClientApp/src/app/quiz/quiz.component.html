@@ -1,4 +1,8 @@
 <div class="container">
+
+    <p>Duration: {{ quiz.duration }} minutes</p>
+    <p>Time remaining: {{ timeRemaining }}</p>
+
     <form (ngSubmit)="onSubmit()">
         <div class="card" *ngFor="let question of questions">
             <div class="card-body">
