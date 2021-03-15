@@ -10,7 +10,7 @@ namespace Let_Quiz.Services
 {
     public interface IResultsRepository
     {
-        bool AddResult(QuizAnswerDTO quizAnswer);
+        Result AddResult(QuizAnswerDTO quizAnswer);
 
         PagedList<ResultDTO> GetResultsByUserName(string username, ResultParams resultParams);
 

@@ -24,7 +24,7 @@ namespace Let_Quiz.Services
             _mapper = mapper;
         }
 
-        public bool AddResult(QuizAnswerDTO quizAnswer)
+        public Result AddResult(QuizAnswerDTO quizAnswer)
         {
             float point = CalculatePoint(quizAnswer.QuizId, quizAnswer.AnswerSelect);
 
@@ -40,24 +40,24 @@ namespace Let_Quiz.Services
             _letQuizContext.Results.Add(result);
             if (_letQuizContext.SaveChanges() > 0)
             {
-                var a = _letQuizContext.Results.OrderBy(r => r.ResultId).LastOrDefault();
-
                 foreach (var answerSelect in quizAnswer.AnswerSelect)
                 {
                     if (answerSelect.AnswerId != 0)
                     {
                         _letQuizContext.ResultDetail.Add(new ResultDetail
                         {
-                            ResultId = a.ResultId,
+                            ResultId = result.ResultId,
                             AnswerId = answerSelect.AnswerId
                         });
                     }
                 }
 
-                return _letQuizContext.SaveChanges() > 0;
+                _letQuizContext.SaveChanges();
+
+                return result;
             }
 
-            return false;
+            return null;
         }
 
         public PagedList<ResultDTO> GetResultsByUserName(string username, ResultParams resultParams)

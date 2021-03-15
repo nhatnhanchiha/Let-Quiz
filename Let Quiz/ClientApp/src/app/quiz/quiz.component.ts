@@ -1,3 +1,5 @@
+import { Result } from './../models/result';
+import { Router } from '@angular/router';
 import { QuizAnswerService } from './../services/QuizAnswerService';
 import { Account } from './../models/Account';
 import { QuizAnswer } from './../models/QuizAnswer';
@@ -22,7 +24,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
     private startTimeStr: string;
 
-    constructor(private questionService: QuestionService, private quizAnswerService: QuizAnswerService) { }
+    constructor(private questionService: QuestionService, private quizAnswerService: QuizAnswerService, private router: Router) { }
 
     ngOnDestroy(): void {
         clearInterval(this.interval);
@@ -99,7 +101,11 @@ export class QuizComponent implements OnInit, OnDestroy {
         };
 
         this.quizAnswerService.addResult(quizAnswer, token).subscribe(
-            (data: QuizAnswer) => console.log(data)
+            (data: Result) => {
+                sessionStorage.removeItem("quizID");
+                sessionStorage.setItem("result", JSON.stringify(data));
+                this.router.navigate(['student-quiz-result']);
+            }
         );
 
         clearInterval(this.interval);

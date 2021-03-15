@@ -1,0 +1,23 @@
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">Name Of Quiz</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">Finish Time</th>
+            <th scope="col">Point</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row">{{ quiz.name }}</th>
+            <td>{{ result.startTime }}</td>
+            <td>{{ result.finishTime }}</td>
+            <td>{{ result.point }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-success" routerLink="/student-index" routerLinkActive="active">Back To Dashboard</a>
+</div>

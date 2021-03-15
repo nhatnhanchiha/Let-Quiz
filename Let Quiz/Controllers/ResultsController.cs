@@ -34,9 +34,10 @@ namespace Let_Quiz.Controllers
         [HttpPost]
         public ActionResult AddResultQuiz([FromBody] QuizAnswerDTO quizAnswer)
         {
-            if (_resultsRepository.AddResult(quizAnswer))
+            var result = _resultsRepository.AddResult(quizAnswer);
+            if (result != null)
             {
-                return Created("https://localhost:44300/api/results", quizAnswer);
+                return Created("https://localhost:44300/api/results", result);
             }
 
             return BadRequest();
