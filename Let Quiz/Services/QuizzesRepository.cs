@@ -51,5 +51,49 @@ namespace Let_Quiz.Services
 
             return (int)Math.Ceiling((numRecord * 1.0) / pageInfo.MaxRecord);
         }
+
+        public IEnumerable<Quiz> GetOwnQuizzes(string username)
+        {
+            var quizzes = _letQuizContext.Quizzes.Select(q => new Quiz
+            {
+                QuizId = q.QuizId,
+                Name = q.Name,
+                Password = q.Password,
+                CreateDate = q.CreateDate,
+                Duration = q.Duration,
+                MaxPoint = q.MaxPoint,
+                AccountUsername = q.AccountUsername,
+                IsExpire = q.IsExpire
+            }).Where(q => q.AccountUsername == username).ToList();
+
+            return quizzes;
+        }
+
+        public Quiz GetQuiz(int quizID)
+        {
+            var q = _letQuizContext.Quizzes.Find(quizID);
+            Quiz quiz = new Quiz
+            {
+                QuizId = quizID,
+                Name = q.Name,
+                Password = q.Password,
+                CreateDate = q.CreateDate,
+                Duration = q.Duration,
+                MaxPoint = q.MaxPoint,
+                IsExpire = q.IsExpire,
+                AccountUsername = q.AccountUsername
+            };
+            return quiz;
+        }
+
+        public void UpdateQuiz(Quiz quiz)
+        {
+            _letQuizContext.Quizzes.Update(quiz);
+        }
+
+        public bool SaveChanges()
+        {
+            return _letQuizContext.SaveChanges() > 0;
+        }
     }
 }

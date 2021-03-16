@@ -1,0 +1,109 @@
+<div class="center">
+    <div class="title">Quiz Detail</div>
+</div>
+    
+<div class="quiz-detail">
+    <div>
+        <strong>Quiz name: </strong>
+        <input type="text" class="form-control" name="name" value="{{quiz.name}}" readonly />
+    </div>
+    <div>
+        <strong>Quiz Password: </strong>
+            <input type="{{hide ? 'password' : 'text' }}" class="form-control" name="password" value="{{quiz.password}}" readonly />
+            <button class="btn btn-outline-dark" (click)="show()">{{hide ? 'Show' : 'Hide' }}</button>
+    </div>
+    <div>
+        <strong>Create Date: </strong>
+        <input type="text" class="form-control" name="createDate" value="{{quiz.createDate | date:'dd/MM/yyyy'}}" readonly />
+    </div>
+    <div>
+        <strong>Duration: </strong>
+        <input type="text" class="form-control" name="duration" value="{{quiz.duration}}" readonly />
+    </div>
+    <div>
+        <strong>Max Point: </strong>
+        <input type="text" class="form-control" name="maxPoint" value="{{quiz.maxPoint}}" readonly />
+    </div>
+    <div>
+        <strong>Is Expired: </strong>
+        <input type="text" class="form-control" name="isExpire" value="{{quiz.isExpire ? 'Yes' : 'No' }}" readonly />
+    </div><br />
+</div><br />
+<div class="center-button">
+    <div class="inline">
+        <a class="btn btn-outline-primary button" (click)="open(change, quiz.password)">Change Password</a>
+        <a class="btn btn-outline-info button" (click)="reOpen(reopen)">Re-Open Quiz</a>
+    </div>
+</div>
+<!--change password-->
+    <ng-template #change let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
+            <button class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form class="form">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Old password:</label>
+                    <div class="form-inline">
+                        <input type="{{hide ? 'password' : 'text' }}" [(ngModel)]="OldPassword" name="OldPassword" id="OldPassword" class="form-control OldPassword">
+                        <button class="btn btn-outline-dark" (click)="show()">{{hide ? 'Show' : 'Hide' }}</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>New Password:</label>
+                    <input type="password" name="NewPassword" class="form-control"
+                            [(ngModel)]="NewPassword"
+                            placeholder="Enter new password...">
+                </div>
+
+                <div class="form-group">
+                    <p class="text-danger">{{ errPassword }}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-dark" (click)="submit()">Change</button>
+            </div>
+        </form>
+    </ng-template>
+
+<!--confirm re-open quiz-->
+    <ng-template #reopen let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Re-Open Quiz</h4>
+            <button class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Do you want to re-open this quiz?</p>
+            <div class="form-group">
+                <p class="text-danger">{{ errPassword }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="reOpenQuiz()">Yes</button>
+            <button type="button" class="btn btn-secondary" (click)="d('Cross click')">No</button>
+        </div>
+    </ng-template>
+
+<br /><br /><div>
+    <div class="center-button">
+        <h2>Questions Bank</h2><br />
+    </div>
+    <div *ngFor='let question of questions; let i = index'>
+        <div class="card" style="width: 70%;">
+            <div class="card-body">
+                <h5 class="card-title"><strong>Q{{i + 1}}:</strong>   {{question.content}}</h5>
+                <h6>Answers:</h6>
+                <ol type="A">
+                    <li *ngFor='let answer of question.answers' class="{{answer.isCorrect? 'text-danger' : ''}}">{{answer.content}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+

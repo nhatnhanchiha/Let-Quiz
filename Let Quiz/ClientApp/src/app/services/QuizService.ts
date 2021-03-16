@@ -41,4 +41,49 @@ export class QuizService {
             })
         });
     }
+
+    getOwnQuizzes(token: string): Observable<Quiz[]> {
+        return this.http.get<Quiz[]>(this.url + "/teacher/own-quizzes", {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
+
+    getQuizDetail(quizID: number, token: string): Observable<Quiz> {
+        return this.http.get<Quiz>(this.url + "/teacher/" + quizID, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
+
+    changePassword(quizID: string, password: string, token: string) {
+        return this.http.put(this.url + "/change-password/" + quizID + "/" + password, null, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
+
+    openQuiz(quizID: string, token: string) {
+        return this.http.put(this.url + "/re-open-quiz", quizID, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
+
+    closeQuiz(quizID: number, token: string) {
+        return this.http.put(this.url + "/close-quiz", quizID, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        });
+    }
 }

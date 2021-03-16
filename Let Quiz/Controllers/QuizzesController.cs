@@ -65,6 +65,81 @@ namespace Let_Quiz.Controllers
             return Ok(pagingQuiz);
         }
 
+        [Authorize(Roles = "True")]
+        [HttpGet("teacher/own-quizzes")]
+        public ActionResult<IEnumerable<Quiz>> GetOwnQuizzes()
+        {
+            var username = User.FindFirst("UserName")?.Value;
+            var quizzes = _quizzesRepository.GetOwnQuizzes(username);
+
+            return Ok(_mapper.Map<IEnumerable<QuizDTO>>(quizzes));
+        }
+
+        [Authorize(Roles = "True")]
+        [HttpGet("teacher/{quizID}")]
+        public ActionResult<Quiz> GetQuiz(int quizID)
+        {
+            var quiz = _quizzesRepository.GetQuiz(quizID);
+
+            return Ok(_mapper.Map<QuizDTO>(quiz));
+        }
+
+        [Authorize(Roles = "True")]
+        [HttpPut("change-password/{quizID}/{password}")]
+        public ActionResult ChangeQuizPassword(int quizID, string password)
+        {
+            var quiz = _quizzesRepository.GetQuiz(quizID);
+            if (quiz == null)
+            {
+                return BadRequest();
+            }
+            quiz.Password = password;
+
+            _quizzesRepository.UpdateQuiz(quiz);
+
+            _quizzesRepository.SaveChanges();
+
+            return NoContent();
+        }
+
+        [Authorize(Roles = "True")]
+        [HttpPut("close-quiz")]
+        public ActionResult CloseQuiz([FromBody] int quizID)
+        {
+            var quiz = _quizzesRepository.GetQuiz(quizID);
+            if (quiz == null)
+            {
+                return BadRequest();
+            }
+
+            quiz.IsExpire = true;
+
+            _quizzesRepository.UpdateQuiz(quiz);
+
+            _quizzesRepository.SaveChanges();
+
+            return NoContent();
+        }
+
+        [Authorize(Roles = "True")]
+        [HttpPut("re-open-quiz")]
+        public ActionResult ReOpenQuiz([FromBody] int quizID)
+        {
+            var quiz = _quizzesRepository.GetQuiz(quizID);
+            if (quiz == null)
+            {
+                return BadRequest();
+            }
+            
+            quiz.IsExpire = false;
+            
+            _quizzesRepository.UpdateQuiz(quiz);
+
+            _quizzesRepository.SaveChanges();
+
+            return NoContent();
+        }
+
         //// GET: api/Quizzes/5
         //[HttpGet("{id}")]
         //public async Task<ActionResult<Quiz>> GetQuiz(int id)

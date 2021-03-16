@@ -31,7 +31,7 @@ namespace Let_Quiz.Controllers
 
         // Anh Dung
         // Get: api/questions
-        [Authorize(Roles ="False")]
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<QuestionDTO>> GetQuestionsByQuizID([FromQuery] int quizID)
         {

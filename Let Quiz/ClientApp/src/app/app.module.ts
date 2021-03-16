@@ -4,7 +4,8 @@ import {QuizComponent} from './quiz/quiz.component';
 import {RegisterComponent} from './register/register.component';
 import {TeacherIndexGuard} from './teacher/teacher-index.guard';
 import {TeacherIndexComponent} from './teacher/teacher-index.component';
-import {StudentIndexComponent} from './student/student-index.component';
+import { StudentIndexComponent } from './student/student-index.component';
+import { ViewQuizDetail } from './teacher/view-quiz/view-quiz.component';
 import {LoginComponent} from './login/login.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -15,7 +16,8 @@ import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {StudentProfileComponent} from './student/student-profile/student-profile.component';
 import {StudentNavComponent} from './student/student-nav/student-nav.component';
-import {StudentAuthGuard} from './_guard/student-auth.guard';
+import { StudentAuthGuard } from './_guard/student-auth.guard';
+import { TeacherAuthGuard } from './_guard/teacher-auth.guard';
 import {StudentHistoriesComponent} from './student/student-histories/student-histories.component';
 import {StudentHistoryDetailComponent} from './student/student-history-detail/student-history-detail.component';
 
@@ -32,6 +34,7 @@ import {StudentHistoryDetailComponent} from './student/student-history-detail/st
         StudentHistoriesComponent,
         StudentHistoryDetailComponent,
         StudentQuizResultComponent,
+        ViewQuizDetail
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -56,10 +59,14 @@ import {StudentHistoryDetailComponent} from './student/student-history-detail/st
             },
             {path: 'register', component: RegisterComponent},
             {
-                path: 'teacher-index',
-                canActivate: [TeacherIndexGuard],
-                component: TeacherIndexComponent
-            },
+                path: '',
+                runGuardsAndResolvers: 'always',
+                canActivate: [TeacherAuthGuard],
+                children: [
+                    { path: 'teacher-index', component: TeacherIndexComponent },
+                    { path: 'view-quiz-detail', component: ViewQuizDetail }
+                ]
+            }
         ]),
         ReactiveFormsModule
     ],

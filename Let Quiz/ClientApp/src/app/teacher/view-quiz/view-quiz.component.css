@@ -32,5 +32,30 @@ a {
     background-color: white;
     border-radius: 5px;
     text-align: center;
-    margin-bottom: 100px;
+}
+
+.quiz-detail {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.form-control {
+    margin: 10px;
+}
+
+.OldPassword {
+    width: 80%;
+}
+
+.button {
+    margin: 0px 30px 0px 30px;
+}
+
+.center-button {
+    width: 100%;
+    text-align: center;
+}
+
+.card {
+    margin: 15px auto;
 }

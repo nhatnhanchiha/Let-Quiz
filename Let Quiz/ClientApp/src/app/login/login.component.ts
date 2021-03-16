@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.accountService.getToken(this.acc).subscribe(
             (data: any) => {
                 sessionStorage.setItem('token', data);
-
+                console.log(data);
                 this.accountService.getAccount(this.acc.username, data).subscribe(
                     (account: Account) => {
                         sessionStorage.setItem('account', JSON.stringify(account));

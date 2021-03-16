@@ -8,5 +8,13 @@ namespace Let_Quiz.Services
     {
         IEnumerable<Quiz> GetQuizzes(PageInfoDTO pageInfo);
         int GetMaxPage(PageInfoDTO pageInfo);
+
+        IEnumerable<Quiz> GetOwnQuizzes(string username);
+
+        Quiz GetQuiz(int quizID);
+
+        void UpdateQuiz(Quiz quiz);
+
+        bool SaveChanges();
     }
 }
