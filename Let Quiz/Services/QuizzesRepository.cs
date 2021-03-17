@@ -95,5 +95,21 @@ namespace Let_Quiz.Services
         {
             return _letQuizContext.SaveChanges() > 0;
         }
+
+        public bool InsertQuizzes(QuizDTO quizt)
+        {
+            var quiz = new Quiz
+            {
+                Name = quizt.Name,
+                Password = quizt.Password,
+                CreateDate = DateTime.Now,
+                Duration = quizt.Duration,
+                MaxPoint = quizt.MaxPoint,
+                IsExpire = quizt.IsExpire,
+                AccountUsername = quizt.TeacherName
+            };
+            _letQuizContext.Quizzes.Add(quiz);
+            return _letQuizContext.SaveChanges() > 0;
+        }
     }
 }

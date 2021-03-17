@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="center">
+        <div class="welcome_teacher">Create Questions</div>
+        <div>
+            <form action="#" class="mx-auto mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
+                <p class="h3 text-center"></p>
+                <div class="form-group">
+                    <label>Content Question:</label>
+                    <input type="text" name="QuizName" [(ngModel)]="question.content" class="form-control"
+                           maxlength="500" required
+                           placeholder="Content Question">
+                </div>
+
+                <div class="form-group">
+                    <label>Correct answer: :</label>
+                    <input type="text" name="correctAnswer" [(ngModel)]="correctAnswer" class="form-control"
+                           maxlength="500" required
+                           placeholder="Correct answer:">
+                </div>
+
+                <div class="form-group">
+                    <label>Other answer: :</label>
+                    <input type="text" name="txtOtherAnswer" [(ngModel)]="otherAnswer" class="form-control"
+                           maxlength="500"
+                           placeholder="Other answer:">
+                    <a class="btn btn-secondary" (click)="addChocie()">+</a>
+                </div>
+                <div class="form-group">
+                    <p class="text-danger">{{ errorCreateQuestion }}</p>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" value="Create" name="btnaction">Create Question</button>
+                </div>
+            </form>
+            <form class="mx-auto mt-5" *ngFor="let fg of otherChoice">
+                <a class="btn btn-secondary" (click)="removeChocie(fg)">-</a>
+                <input type="text" id="otherchoice" name="txtOther" class="form-control" value="{{fg}}">
+            </form>
+        </div>
+    </div>
+</div>
+
+

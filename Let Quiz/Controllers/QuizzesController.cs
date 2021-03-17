@@ -15,7 +15,7 @@ using Let_Quiz.Models;
 namespace Let_Quiz.Controllers
 {
     [Route("api/quizzes")]
-    [ApiController]
+    [ApiController]     
     public class QuizzesController : ControllerBase
     {
         private readonly LetQuizContext _context;
@@ -140,6 +140,20 @@ namespace Let_Quiz.Controllers
             return NoContent();
         }
 
+        //Ngoc Tien 
+        // POST: api/quizzes
+        [Authorize(Roles = "True")]
+        [HttpPost("InsertQuizzes")]
+        public ActionResult InsertQuizzes([FromBody] QuizDTO quiz)
+        {
+
+            if (_quizzesRepository.InsertQuizzes(quiz))
+            {
+                return Ok(_mapper.Map<QuizDTO>(quiz));
+            }
+
+            return BadRequest();
+        }
         //// GET: api/Quizzes/5
         //[HttpGet("{id}")]
         //public async Task<ActionResult<Quiz>> GetQuiz(int id)

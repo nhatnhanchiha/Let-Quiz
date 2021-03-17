@@ -3,7 +3,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {QuizComponent} from './quiz/quiz.component';
 import {RegisterComponent} from './register/register.component';
 import {TeacherIndexGuard} from './teacher/teacher-index.guard';
-import {TeacherIndexComponent} from './teacher/teacher-index.component';
+import { TeacherIndexComponent } from './teacher/teacher-index.component';
+import { CreateQuiztComponent } from './createQuizt/createQuizt.component';
+import { CreateQuestionComponent } from './createQuestion/createQuestion.component';
 import { StudentIndexComponent } from './student/student-index.component';
 import { ViewQuizDetail } from './teacher/view-quiz/view-quiz.component';
 import {LoginComponent} from './login/login.component';
@@ -34,7 +36,9 @@ import {StudentHistoryDetailComponent} from './student/student-history-detail/st
         StudentHistoriesComponent,
         StudentHistoryDetailComponent,
         StudentQuizResultComponent,
-        ViewQuizDetail
+        ViewQuizDetail,
+        CreateQuiztComponent,
+        CreateQuestionComponent
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -66,7 +70,9 @@ import {StudentHistoryDetailComponent} from './student/student-history-detail/st
                     { path: 'teacher-index', component: TeacherIndexComponent },
                     { path: 'view-quiz-detail', component: ViewQuizDetail }
                 ]
-            }
+            },
+            { path: 'createQuizt', component: CreateQuiztComponent },
+            { path: 'createQuestion', component: CreateQuestionComponent }
         ]),
         ReactiveFormsModule
     ],

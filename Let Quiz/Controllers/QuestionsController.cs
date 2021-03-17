@@ -40,6 +40,20 @@ namespace Let_Quiz.Controllers
             return Ok(_mapper.Map<IEnumerable<QuestionDTO>>(questions));
         }
 
+        //Ngoc Tien 
+        // POST: api/questions 
+        [Authorize(Roles = "True")]
+        [HttpPost("InsertQuestion")]
+        public ActionResult InsertQuestion([FromBody] QuestionDTO question)
+        {
+
+            if (_questionRepository.InsertQuestion(question))
+            {
+                return Ok(_mapper.Map<QuestionDTO>(question));
+            }
+
+            return BadRequest();
+        }
         //// GET: api/Questions
         //[HttpGet]
         //public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()

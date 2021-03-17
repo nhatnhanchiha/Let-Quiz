@@ -1,4 +1,5 @@
 ﻿using LetQuiz.Domain;
+using Let_Quiz.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Let_Quiz.Services
     public interface IQuestionRepository
     {
         IEnumerable<Question> GetQuestionsByQuizID(int quizID);
+        bool InsertQuestion(QuestionDTO q);
     }
 }
