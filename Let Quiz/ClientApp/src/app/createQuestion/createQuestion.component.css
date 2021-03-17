@@ -29,6 +29,7 @@ a {
     font-size: 30px;
     padding: 50px 100px 50px 100px;
     margin: 10px;
-    background-color: #fff178;
+    background-color: white;
     border-radius: 5px;
+    text-align: center;
 }

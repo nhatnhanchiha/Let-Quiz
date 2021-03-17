@@ -56,18 +56,22 @@ export class CreateQuestionComponent implements OnInit {
         this.otherChoices.splice(index, 1);
     }
     onSubmit() {
-        if (this.otherChoice.length <= 0) {
-            confirm("add more other choice to create question");
+        if (this.otherChoice.includes(this.correctAnswer)) {
+            confirm("Plase enter correct answer disferrence other choice");
         } else {
-            this.a.content = this.correctAnswer;
-            this.question.answers.push(this.a);
-            for (let s of this.otherChoices) {
-                this.question.answers.push(s);
+            if (this.otherChoice.length <= 0) {
+                confirm("add more other choice to create question");
+            } else {
+                this.a.content = this.correctAnswer;
+                this.question.answers.push(this.a);
+                for (let s of this.otherChoices) {
+                    this.question.answers.push(s);
+                }
+                this.question.questionId = this.ListQuantion.length;
+                this.ListQuantion.push(this.question);
+                sessionStorage.setItem('listQuestion', JSON.stringify(this.ListQuantion));
+                this.router.navigate(['/createQuizt']);
             }
-            this.question.questionId = this.ListQuantion.length;
-            this.ListQuantion.push(this.question);
-            sessionStorage.setItem('listQuestion', JSON.stringify(this.ListQuantion));
-            this.router.navigate(['/createQuizt']);
         }
     }
 }

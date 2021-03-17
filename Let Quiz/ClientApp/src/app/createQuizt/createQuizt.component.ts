@@ -91,6 +91,8 @@ export class CreateQuiztComponent implements OnInit {
                     }
                 );
             }
+            sessionStorage.setItem('listQuestion', null);
+            sessionStorage.setItem('quizt', null);
         }
     }
 }

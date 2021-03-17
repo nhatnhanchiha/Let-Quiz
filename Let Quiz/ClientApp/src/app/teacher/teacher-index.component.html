@@ -1,7 +1,15 @@
 <div class="center">
     <div class="title">Welcome To Let Quiz</div>
 </div>
+<form (ngSubmit)="search()">
+    <div class="form-group">
+        <input type="text" name="searchValue" class="form-control" placeholder="Search..." [(ngModel)]="searchValue">
+    </div>
 
+    <div class="form-group">
+        <button class="btn btn-outline-primary">Search</button>
+    </div>
+</form>
 <div class="col-12">
     <div class="center">
         <table class="table table-hover">
@@ -34,6 +42,14 @@
         </table>
     </div>
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" (click)="previousPage()">Previous</a></li>
+        <li class="page-item"><div class="page-link">{{ pagingQuiz.currentPage }} / {{ pagingQuiz.maxPage }}</div></li>
+        <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
+    </ul>
+</nav>
 
 <ng-template #close let-c="close" let-d="dismiss">
     <div class="modal-header">

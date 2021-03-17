@@ -1,6 +1,6 @@
+<div class="welcome_teacher center">Create Questions</div>
 <div class="row">
-    <div class="center">
-        <div class="welcome_teacher">Create Questions</div>
+    <div class="center">  
         <div>
             <form action="#" class="mx-auto mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
                 <p class="h3 text-center"></p>
@@ -20,21 +20,27 @@
 
                 <div class="form-group">
                     <label>Other answer: :</label>
-                    <input type="text" name="txtOtherAnswer" [(ngModel)]="otherAnswer" class="form-control"
-                           maxlength="500"
-                           placeholder="Other answer:">
-                    <a class="btn btn-secondary" (click)="addChocie()">+</a>
+                    <div class="inline">
+                        <input type="text" name="txtOtherAnswer" [(ngModel)]="otherAnswer"
+                               maxlength="500"
+                               placeholder="Other answer:">
+                        <a class="btn btn-outline-success" (click)="addChocie()">+</a>
+                    </div>
                 </div>
+                <form *ngFor="let fg of otherChoice">
+                    <div class="inline">
+                        <input type="text" id="otherchoice" name="txtOther" value="{{fg}}">
+                        <a class="btn btn-outline-danger" (click)="removeChocie(fg)">-</a>
+                    </div>
+                </form>
                 <div class="form-group">
                     <p class="text-danger">{{ errorCreateQuestion }}</p>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" value="Create" name="btnaction">Create Question</button>
+                <div class="center-button">
+                    <div class="inline">
+                        <button class="btn btn-outline-primary button" value="Create" name="btnaction">Create Question</button>
+                    </div>
                 </div>
-            </form>
-            <form class="mx-auto mt-5" *ngFor="let fg of otherChoice">
-                <a class="btn btn-secondary" (click)="removeChocie(fg)">-</a>
-                <input type="text" id="otherchoice" name="txtOther" class="form-control" value="{{fg}}">
             </form>
         </div>
     </div>
