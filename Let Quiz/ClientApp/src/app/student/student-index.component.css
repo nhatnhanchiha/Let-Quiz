@@ -18,3 +18,24 @@
 a {
     cursor: pointer;
 }
+
+.bg-primary {
+    background-color: azure !important;
+}
+
+
+.btn-info {
+    background-color: #e63d4b !important;
+}
+
+.card-text {
+    min-height: 130px;
+}
+
+.card {
+    border-radius: 5%;
+}
+
+.card:hover {
+    background-color: white !important;
+}

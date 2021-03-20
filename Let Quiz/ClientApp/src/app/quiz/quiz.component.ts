@@ -10,7 +10,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Quiz } from '../models/Quiz';
 
 @Component({
-    templateUrl: './quiz.component.html'
+    templateUrl: './quiz.component.html',
+    styleUrls: ['./quiz.component.css']
 })
 
 export class QuizComponent implements OnInit, OnDestroy {

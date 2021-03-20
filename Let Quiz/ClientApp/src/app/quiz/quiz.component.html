@@ -1,21 +1,22 @@
 <div class="container">
 
     <p>Duration: {{ quiz.duration }} minutes</p>
-    <p>Time remaining: {{ timeRemaining }}</p>
+    <p>Time remaining: <span class="text-danger">{{ timeRemaining }}</span> </p>
 
     <form (ngSubmit)="onSubmit()">
-        <div class="card" *ngFor="let question of questions">
+        <div class="card mb-4" *ngFor="let question of questions">
             <div class="card-body">
                 <div class="form-group">
                     {{ question.content }}
                 </div>
-    
+
                 <div class="form-group" *ngFor="let answer of question.answers">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <input type="radio" name="{{ question.questionId }}" (click)="onSelectAnswer(question.questionId, answer.answerId)">
-                          </div>
+                            <div class="input-group-text">
+                                <input type="radio" name="{{ question.questionId }}"
+                                       (click)="onSelectAnswer(question.questionId, answer.answerId)">
+                            </div>
                         </div>
                         <input type="text" class="form-control" value="{{ answer.content }}" readonly>
                     </div>
@@ -24,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-info float-right mb-4" onclick="return confirm('Do you want to finish?')">Submit</button>
         </div>
     </form>
 </div>

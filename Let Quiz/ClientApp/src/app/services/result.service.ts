@@ -16,12 +16,16 @@ export class ResultService {
     constructor(private http: HttpClient) {
     }
 
-    getResults(page?: number, itemsPerPage?: number): Observable<any> {
+    getResults(page?: number, itemsPerPage?: number, quizName?: string): Observable<any> {
         const token = sessionStorage.getItem('token');
         let params = new HttpParams();
         if (page !== null && itemsPerPage !== null) {
             params = params.append('pageNumber', page.toString());
             params = params.append('pageSize', itemsPerPage.toString());
+        }
+
+        if (quizName !== null) {
+            params = params.append('quizName', quizName);
         }
 
         return this.http.get<Result[]>(this.baseUrl + '/student/results',

@@ -66,6 +66,7 @@ namespace Let_Quiz.Services
                 .Where(r => r.AccountUsername == username)
                 .Include(r => r.Quiz)
                 .ProjectTo<ResultDTO>(_mapper.ConfigurationProvider)
+                .Where(r => (r.NameOfQuiz.ToLower().Contains(resultParams.QuizName == null ? "" : resultParams.QuizName.ToLower())))
                 .OrderByDescending(r => r.FinishTime)
                 .AsNoTracking();
             return PagedList<ResultDTO>.Create(query, resultParams.PageNumber, resultParams.PageSize);

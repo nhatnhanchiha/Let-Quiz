@@ -67,8 +67,8 @@ export class StudentProfileComponent implements OnInit {
                 this.accountService.getProfile().subscribe((account: Account) => {
                     this.account = account;
                     this.accountService.setCurrentAccount(account);
+                    this.initialForm();
                 });
-                this.initialForm();
             }, error => {
                 if (error.status === 400) {
                     this.passErr = "Wrong password!";

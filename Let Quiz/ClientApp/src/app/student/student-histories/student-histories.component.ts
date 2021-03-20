@@ -13,6 +13,7 @@ export class StudentHistoriesComponent implements OnInit {
     pagination: Pagination;
     pageNumber = 1;
     pageSize = 5;
+    quizName = "";
 
     constructor(private resultService: ResultService) {
     }
@@ -21,8 +22,14 @@ export class StudentHistoriesComponent implements OnInit {
         this.loadResults();
     }
 
+    search() {
+        this.pageNumber = 1;
+        this.pageSize = 5;
+        this.loadResults();
+    }
+
     loadResults() {
-        this.resultService.getResults(this.pageNumber, this.pageSize).subscribe(response => {
+        this.resultService.getResults(this.pageNumber, this.pageSize, this.quizName).subscribe(response => {
             this.results = response.result;
             this.pagination = response.pagination;
         })

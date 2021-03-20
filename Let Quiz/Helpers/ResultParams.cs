@@ -6,6 +6,8 @@
         public int PageNumber { get; set; } = 1;
         private int _pageSize = 10;
 
+        public string QuizName { get; set; } = "";
+
         public int PageSize
         {
             get => _pageSize;

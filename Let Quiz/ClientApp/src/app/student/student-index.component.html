@@ -1,32 +1,36 @@
-<div class="container mt-5">
-    <form (ngSubmit)="search()">
-        <div class="form-group">
-            <input type="text" name="searchValue" class="form-control" placeholder="Search..." [(ngModel)]="searchValue">
-        </div>
+<div class="mt-5">
+    <div class="input-group w-50 mb-4">
+        <input type="text" name="searchValue" class="form-control ml-2" placeholder="Search by name of quiz"
+               [(ngModel)]="searchValue">
+        <button class="btn btn-info ml-2" (click)="search()">Search</button>
+    </div>
 
-        <div class="form-group">
-            <button class="btn btn-outline-primary">Search</button>
-        </div>
-    </form>
-
-    <div class="row justify-content-between mx-5">
-        <div class="card col-5 mb-4" *ngFor='let quiz of quizzes'>
-            <div class="card-header">{{ quiz.name }}</div>
-            <div class="card-body">
-                <div>Duration: {{ quiz.duration }} minutes</div>
-                <div>Creator: {{ quiz.teacherName }}</div>
-                <div>Create Date: {{ quiz.createDate }}</div>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" (click)="open(content, quiz.quizId)">Take Quiz</a>
+    <div class="row mb-4">
+        <div class="col-4 pt-2 pb-2" *ngFor='let quiz of quizzes'>
+            <div class="card bg-primary font-weight-bold">
+                <div class="card-body">
+                    <h4 class="card-title">{{ quiz.name }}</h4>
+                    <hr>
+                    <div class="card-text">
+                        <div>Duration: {{ quiz.duration }} minutes</div>
+                        <div>Creator: {{ quiz.teacherName }}</div>
+                        <div>Create Date: {{ quiz.createDate }}</div>
+                    </div>
+                    <hr>
+                    <button type="button" class="btn btn-info float-right" (click)="open(content, quiz.quizId)">Take
+                        Quiz
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" (click)="previousPage()">Previous</a></li>
-            <li class="page-item"><div class="page-link">{{ pagingQuiz.currentPage }} / {{ pagingQuiz.maxPage }}</div></li>
+            <li class="page-item"><a class="page-link" (click)="previousPage()">Prev</a></li>
+            <li class="page-item">
+                <div class="page-link">{{ pagingQuiz.currentPage }} / {{ pagingQuiz.maxPage }}</div>
+            </li>
             <li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>
         </ul>
     </nav>
@@ -34,18 +38,18 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Enter the password to take the quiz</h4>
-      <button class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title" id="modal-basic-title">Enter the password to take the quiz</h4>
+        <button class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <form class="form" (ngSubmit)="onSubmit()">
         <div class="modal-body">
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control"
-                        [(ngModel)]="password"
-                        placeholder="Enter password...">
+                       [(ngModel)]="password"
+                       placeholder="Enter password...">
             </div>
 
             <div class="form-group">
