@@ -10,6 +10,5 @@ namespace Let_Quiz.Services
     public interface IQuestionRepository
     {
         IEnumerable<Question> GetQuestionsByQuizID(int quizID);
-        bool InsertQuestion(QuestionDTO q);
     }
 }

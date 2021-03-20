@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Quiz } from '../models/Quiz';
 import { Account } from './../models/Account';
+import { Answer } from './../models/Answer';
 import { QuestionService } from './../services/QuestionService';
 import { Question } from '../models/Question';
 import { QuizService } from './../services/QuizService';
@@ -15,15 +16,15 @@ export class CreateQuiztComponent implements OnInit {
 
     account: Account = JSON.parse(sessionStorage.getItem('account'));
     quiz: Quiz = JSON.parse(sessionStorage.getItem('quizt'));
-    ListQuantion: Question[];
+    listQuestion: Question[];
     constructor(private quiztService: QuizService, private questionService: QuestionService,private router: Router) {     }
     errorCreateQuestion: string;
     ngOnInit() {
-        this.ListQuantion = JSON.parse(sessionStorage.getItem('listQuestion'));
-        if (this.ListQuantion == null) {
-            this.ListQuantion = new Array();
+        this.listQuestion = JSON.parse(sessionStorage.getItem('listQuestion'));
+        if (this.listQuestion == null) {
+            this.listQuestion = new Array();
         }
-        sessionStorage.setItem('listQuestion', JSON.stringify(this.ListQuantion));
+        sessionStorage.setItem('listQuestion', JSON.stringify(this.listQuestion));
         this.quiz = JSON.parse(sessionStorage.getItem('quizt'));
         if (this.quiz == null) {
             var q: Quiz = {
@@ -43,9 +44,9 @@ export class CreateQuiztComponent implements OnInit {
     }
 
     removeQuestion(fg: number) {
-        let index = this.ListQuantion.findIndex(c => c.questionId === fg);
-        this.ListQuantion.splice(index, 1);
-        sessionStorage.setItem('listQuestion', JSON.stringify(this.ListQuantion));
+        let index = this.listQuestion.findIndex(c => c.questionId === fg);
+        this.listQuestion.splice(index, 1);
+        sessionStorage.setItem('listQuestion', JSON.stringify(this.listQuestion));
         sessionStorage.setItem('quizt', JSON.stringify(this.quiz));
     }
     logout() {
@@ -57,8 +58,8 @@ export class CreateQuiztComponent implements OnInit {
         this.router.navigate(['/createQuestion'])
     }
     onSubmit() {
-        if (this.ListQuantion != null) {
-            if (this.ListQuantion.length == 0) {
+        if (this.listQuestion != null) {
+            if (this.listQuestion.length == 0) {
                 confirm("can't Create you must add question");
             } else {
                 let token: string = sessionStorage.getItem('token');
@@ -73,20 +74,24 @@ export class CreateQuiztComponent implements OnInit {
                     teacherName: this.quiz.teacherName,
                     questionDtos: []
                 }
+                for (let q of this.listQuestion) {
+                    let question: Question = {
+                        questionId: q.questionId,
+                        content: q.content,
+                        answers: []
+                    }
+                    for (let a of q.answers) {
+                        let answer: Answer = {
+                            answerId: a.answerId,
+                            content: a.content,
+                            isCorrect: a.isCorrect
+                        }
+                        question.answers.push(answer);
+                    }
+                    quizt.questionDtos.push(question);
+                }
                 this.quiztService.insertQuizzes(quizt, token).subscribe(
                     (data: Quiz) => {
-                        for (let q of this.ListQuantion) {
-                            let ques: Question = {
-                                answers: q.answers,
-                                content: q.content,
-                                questionId: q.questionId
-                            }
-                            this.questionService.insertQuestion(ques, token).subscribe(
-                                (data: Question) => {
-                                    console.log("ss");
-                                }
-                            );
-                        }
                         this.router.navigate(['teacher-index']);
                     }
                 );

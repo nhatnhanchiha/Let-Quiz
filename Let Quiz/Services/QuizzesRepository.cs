@@ -96,7 +96,7 @@ namespace Let_Quiz.Services
             return _letQuizContext.SaveChanges() > 0;
         }
 
-        public bool InsertQuizzes(QuizDTO quizt)
+        public bool InsertQuiz(QuizDTO quizt)
         {
             var quiz = new Quiz
             {
@@ -106,8 +106,27 @@ namespace Let_Quiz.Services
                 Duration = quizt.Duration,
                 MaxPoint = quizt.MaxPoint,
                 IsExpire = quizt.IsExpire,
-                AccountUsername = quizt.TeacherName
+                AccountUsername = quizt.TeacherName,
+                Questions = new List<Question>()
             };
+            foreach (QuestionDTO question in quizt.QuestionDtos)
+            {
+                quiz.Questions.Add(new Question
+                {
+                    Content = question.Content,
+                    QuizId = quiz.QuizId,
+                    Answers = new List<Answer>()
+                });
+                foreach (AnswerDTO awnser in question.Answers)
+                {
+                    quiz.Questions.ElementAt<Question>(quiz.Questions.Count - 1).Answers.Add(new Answer
+                    {
+                        QuestionId = quiz.Questions.ElementAt<Question>(quiz.Questions.Count - 1).QuestionId,
+                        Content = awnser.Content,
+                        IsCorrect = awnser.IsCorrect
+                    });
+                }
+            }
             _letQuizContext.Quizzes.Add(quiz);
             return _letQuizContext.SaveChanges() > 0;
         }

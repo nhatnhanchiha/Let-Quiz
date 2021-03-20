@@ -88,7 +88,7 @@ export class QuizService {
     }
 
     insertQuizzes(quiz: Quiz, token: string): Observable<Quiz> {
-        return this.http.post<Quiz>(this.url + "/InsertQuizzes", quiz, {
+        return this.http.post<Quiz>(this.url + "/insert-quizzes", quiz, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

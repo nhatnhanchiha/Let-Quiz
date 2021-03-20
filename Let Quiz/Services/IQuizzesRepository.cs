@@ -17,6 +17,6 @@ namespace Let_Quiz.Services
 
         bool SaveChanges();
 
-        bool InsertQuizzes(QuizDTO quizt);
+        bool InsertQuiz(QuizDTO quizt);
     }
 }

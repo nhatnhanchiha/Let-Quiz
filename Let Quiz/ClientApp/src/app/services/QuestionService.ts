@@ -22,12 +22,4 @@ export class QuestionService {
             })
         });
     }
-    insertQuestion(question: Question, token: string): Observable<Question> {
-        return this.http.post<Question>(this.urlBase + "/InsertQuestion", question, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            })
-        });
-    }
 }

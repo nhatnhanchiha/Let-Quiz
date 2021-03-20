@@ -140,21 +140,19 @@ namespace Let_Quiz.Controllers
             return NoContent();
         }
 
-        //Ngoc Tien 
-        // POST: api/quizzes
         [Authorize(Roles = "True")]
-        [HttpPost("InsertQuizzes")]
+        [HttpPost("insert-quizzes")]
         public ActionResult InsertQuizzes([FromBody] QuizDTO quiz)
         {
 
-            if (_quizzesRepository.InsertQuizzes(quiz))
+            if (_quizzesRepository.InsertQuiz(quiz))
             {
                 return Ok(_mapper.Map<QuizDTO>(quiz));
             }
 
             return BadRequest();
         }
-        //// GET: api/Quizzes/5
+        // GET: api/Quizzes/5
         //[HttpGet("{id}")]
         //public async Task<ActionResult<Quiz>> GetQuiz(int id)
         //{

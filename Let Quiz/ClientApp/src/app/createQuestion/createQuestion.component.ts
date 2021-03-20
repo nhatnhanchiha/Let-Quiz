@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class CreateQuestionComponent implements OnInit {
 
     account: Account = JSON.parse(sessionStorage.getItem('account'));
-    ListQuantion: Question[] = JSON.parse(sessionStorage.getItem('listQuestion'));
+    listQuestion: Question[] = JSON.parse(sessionStorage.getItem('listQuestion'));
     question: Question = {
         questionId: 1,
         content: "",
@@ -67,9 +67,9 @@ export class CreateQuestionComponent implements OnInit {
                 for (let s of this.otherChoices) {
                     this.question.answers.push(s);
                 }
-                this.question.questionId = this.ListQuantion.length;
-                this.ListQuantion.push(this.question);
-                sessionStorage.setItem('listQuestion', JSON.stringify(this.ListQuantion));
+                this.question.questionId = this.listQuestion.length;
+                this.listQuestion.push(this.question);
+                sessionStorage.setItem('listQuestion', JSON.stringify(this.listQuestion));
                 this.router.navigate(['/createQuizt']);
             }
         }

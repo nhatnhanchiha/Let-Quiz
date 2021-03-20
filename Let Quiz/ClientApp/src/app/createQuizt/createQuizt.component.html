@@ -1,8 +1,6 @@
 <div class="welcome_teacher center">Create Quizt</div>
-<div class="row">
-    
+<div class="row"> 
     <div class="center">
-
         <div>
             <form action="#" class="mx-auto mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
                 <p class="h3 text-center"></p>
@@ -22,9 +20,9 @@
 
                 <div class="form-group">
                     <label>Duration :</label>
-                    <input id="rangeInput" type="range" name="rangeprice" min="1" max="360" oninput="PriceEnd.value=rangeInput.value"
+                    <input id="rangeInput" type="range" name="rangeprice" min="1" max="360" oninput="txtduration.value=rangeInput.value"
                            step="1" value="1" [(ngModel)]="quiz.duration" />
-                    <input id="PriceEnd" type="number" value="1" [(ngModel)]="quiz.duration" name="txtpriceend" min="1" max="360" oninput="rangeInput.value=PriceEnd.value" />
+                    <input id="txtduration" type="number" value="1" [(ngModel)]="quiz.duration" name="txtduration" min="1" max="360" oninput="rangeInput.value=txtduration.value" />
                 </div>
 
                 <div class="form-group">
@@ -40,12 +38,12 @@
         </div>
     </div>
 </div>
-<div *ngFor="let Question of ListQuantion">
+<div *ngFor="let question of listQuestion">
     <div class="card">
-        <a>Question : {{Question.content}}</a><br />
+        <a>Question : {{question.content}}</a><br />
             <ol type="A" >
-                 <li *ngFor="let answer of Question.answers" class="{{answer.isCorrect? 'text-danger' : ''}}">{{answer.content}}</li>
+                 <li *ngFor="let answer of question.answers" class="{{answer.isCorrect? 'text-danger' : ''}}">{{answer.content}}</li>
             </ol>
-        <a class="btn btn-secondary" (click)="removeQuestion(Question.questionId)">Remove Question</a>
+        <a class="btn btn-secondary" (click)="removeQuestion(question.questionId)">Remove Question</a>
     </div>
 </div>
