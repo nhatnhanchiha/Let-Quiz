@@ -1,15 +1,17 @@
 import { Router } from '@angular/router';
 import { Quiz } from '../models/Quiz';
-import { Account } from './../models/Account';
-import { Answer } from './../models/Answer';
-import { QuestionService } from './../services/QuestionService';
+import { Account } from '../models/Account';
+import { Answer } from '../models/Answer';
+import { QuestionService } from '../services/QuestionService';
 import { Question } from '../models/Question';
-import { QuizService } from './../services/QuizService';
+import { QuizService } from '../services/QuizService';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    templateUrl: './createQuizt.component.html',
-    styleUrls: ['./createQuizt.component.css'],
+    templateUrl: './create-quizt.component.html',
+    styleUrls: ['./create-quizt.component.css'],
+    providers: [NgbModal]
 })
 
 export class CreateQuiztComponent implements OnInit {
@@ -17,8 +19,8 @@ export class CreateQuiztComponent implements OnInit {
     account: Account = JSON.parse(sessionStorage.getItem('account'));
     quiz: Quiz = JSON.parse(sessionStorage.getItem('quizt'));
     listQuestion: Question[];
-    constructor(private quiztService: QuizService, private questionService: QuestionService,private router: Router) {     }
-    errorCreateQuestion: string;
+    constructor(private quiztService: QuizService, private questionService: QuestionService, private router: Router, private modalService: NgbModal) {     }
+    errorCreateQuzt: string;
     ngOnInit() {
         this.listQuestion = JSON.parse(sessionStorage.getItem('listQuestion'));
         if (this.listQuestion == null) {
@@ -57,10 +59,12 @@ export class CreateQuiztComponent implements OnInit {
         sessionStorage.setItem('quizt', JSON.stringify(this.quiz));
         this.router.navigate(['/createQuestion'])
     }
-    onSubmit() {
+    onSubmit(error) {
         if (this.listQuestion != null) {
             if (this.listQuestion.length == 0) {
-                confirm("can't Create you must add question");
+                this.errorCreateQuzt = "can't Create you must add question";
+                this.modalService.open(error);
+                //confirm("can't Create you must add question");
             } else {
                 let token: string = sessionStorage.getItem('token');
                 let quizt: Quiz = {
@@ -86,6 +90,7 @@ export class CreateQuiztComponent implements OnInit {
                             content: a.content,
                             isCorrect: a.isCorrect
                         }
+                        
                         question.answers.push(answer);
                     }
                     quizt.questionDtos.push(question);

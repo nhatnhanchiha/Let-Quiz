@@ -1,11 +1,13 @@
 import { Router } from '@angular/router';
-import { Question } from '../models/Question';
-import { Answer } from '../models/Answer';
+import { Question } from '../../models/Question';
+import { Answer } from '../../models/Answer';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    templateUrl: './createQuestion.component.html',
-    styleUrls: ['./createQuestion.component.css'],
+    templateUrl: './create-question.component.html',
+    styleUrls: ['./create-question.component.css'],
+    providers: [NgbModal]
 })
 
 export class CreateQuestionComponent implements OnInit {
@@ -26,8 +28,7 @@ export class CreateQuestionComponent implements OnInit {
         content: "",
         isCorrect: true
     };
-    x: number = 0;
-    constructor(private router: Router) {     }
+    constructor(private router: Router, private modalService: NgbModal) {     }
     errorCreateQuestion: string;
     ngOnInit() {
         let token: string = sessionStorage.getItem('token');
@@ -37,9 +38,11 @@ export class CreateQuestionComponent implements OnInit {
         sessionStorage.clear();
         this.router.navigate(['/login']);
     }
-    addChocie() {
+    addChocie(error) {
         if (this.otherChoice.includes(this.otherAnswer) || this.otherAnswer === this.correctAnswer || this.otherAnswer.length == 0) {
-            confirm("can't add this choice");
+            this.errorCreateQuestion = "can't add this choice";
+            this.modalService.open(error);
+            //confirm("can't add this choice");
         } else {
             this.otherChoice.push(this.otherAnswer);
             var x: Answer = {
@@ -55,12 +58,16 @@ export class CreateQuestionComponent implements OnInit {
         this.otherChoice.splice(index, 1);
         this.otherChoices.splice(index, 1);
     }
-    onSubmit() {
+    onSubmit(error) {
         if (this.otherChoice.includes(this.correctAnswer)) {
-            confirm("Plase enter correct answer disferrence other choice");
+            this.errorCreateQuestion = "Plase enter correct answer disferrence other choice";
+            this.modalService.open(error);
+            //confirm("Plase enter correct answer disferrence other choice");
         } else {
             if (this.otherChoice.length <= 0) {
-                confirm("add more other choice to create question");
+                this.errorCreateQuestion = "add more other choice to create question";
+                this.modalService.open(error);
+                //confirm("add more other choice to create question");
             } else {
                 this.a.content = this.correctAnswer;
                 this.question.answers.push(this.a);

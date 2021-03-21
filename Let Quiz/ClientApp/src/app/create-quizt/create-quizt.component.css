@@ -1,0 +1,71 @@
+nav {
+    background: #798188;
+    height: 100vh;
+}
+
+.nav-link, .h2 {
+    color: #ffffffd7;
+}
+
+.nav-link {
+    font-size: 20px;
+}
+
+.h2 {
+    font-size: 30px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.form-quiz {
+    width: 30%;
+    margin: 0 auto;
+    
+}
+
+.welcome_teacher {
+    height: 100px;
+    border: solid black 2px;
+    font-size: 30px;
+    padding: 50px 100px 50px 100px;
+    margin: 10px;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.form_question {
+    border: solid black 0.5px;
+    font-size: 30px;
+    padding: 50px 100px 50px 100px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.center-button {
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+}
+
+.around-the-button {
+    margin: 30px;
+    margin-top: 5px;
+    width: 15%;
+}
+.form-question {
+    padding-left: 10%;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+.remove-button {
+    width: 20%;
+    margin-left: 40%;
+}
