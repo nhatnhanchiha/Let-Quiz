@@ -59,3 +59,9 @@ a {
 .card {
     margin: 15px auto;
 }
+
+.around-the-button {
+    margin: 30px;
+    margin-top: 5px;
+    width: 15%;
+}

@@ -34,7 +34,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
         let currentPage = 1;
 
-        this.quizService.getQuizzes(token, this.searchValue, currentPage, this.maxRecord).subscribe(
+        this.quizService.getQuizzesForTeacher(token, this.searchValue, currentPage, this.maxRecord).subscribe(
             (data: PagingQuiz) => {
                 this.pagingQuiz = data;
                 this.quizzes = data.quizzes;
@@ -79,7 +79,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
 
         if (this.pagingQuiz.nextPage != null) {
-            this.quizService.changePage(token, this.pagingQuiz.nextPage).subscribe(
+            this.quizService.changePageForTeacher(token, this.pagingQuiz.nextPage).subscribe(
                 (data: PagingQuiz) => {
                     this.pagingQuiz = data;
                     this.quizzes = data.quizzes;
@@ -93,7 +93,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
 
         if (this.pagingQuiz.previousPage != null) {
-            this.quizService.changePage(token, this.pagingQuiz.previousPage).subscribe(
+            this.quizService.changePageForTeacher(token, this.pagingQuiz.previousPage).subscribe(
                 (data: PagingQuiz) => {
                     this.pagingQuiz = data;
                     this.quizzes = data.quizzes;
@@ -107,7 +107,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
         let currentPage = 1;
 
-        this.quizService.getQuizzes(token, this.searchValue, currentPage, this.maxRecord).subscribe(
+        this.quizService.getQuizzesForTeacher(token, this.searchValue, currentPage, this.maxRecord).subscribe(
             (data: PagingQuiz) => {
                 this.pagingQuiz = data;
                 this.quizzes = data.quizzes;

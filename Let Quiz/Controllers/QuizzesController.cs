@@ -31,7 +31,7 @@ namespace Let_Quiz.Controllers
 
         // Anh Dung
         // GET: api/quizzes
-        [Authorize]
+        [Authorize(Roles = "False")]
         [HttpGet(Name = "GetQuizzes")]
         public ActionResult<IEnumerable<Quiz>> GetQuizzes([FromQuery] PageInfoDTO pageInfo)
         {
@@ -149,8 +149,41 @@ namespace Let_Quiz.Controllers
             {
                 return Ok(_mapper.Map<QuizDTO>(quiz));
             }
-
             return BadRequest();
+        }
+
+        [Authorize(Roles = "True")]
+        [HttpGet("GetQuizzesForTeacher")]
+        public ActionResult<IEnumerable<Quiz>> GetQuizzesForTeacher([FromQuery] PageInfoDTO pageInfo)
+        {
+            if (pageInfo == null || pageInfo.CurrentPage <= 0 || pageInfo.MaxRecord <= 0)
+            {
+                return BadRequest();
+            }
+
+            if (pageInfo.SearchValue == null)
+            {
+                pageInfo.SearchValue = "";
+            }
+
+            var quizzes = _quizzesRepository.GetQuizzesForTeacher(pageInfo);
+            var quizzesDTO = _mapper.Map<IEnumerable<QuizDTO>>(quizzes);
+
+            int maxPage = _quizzesRepository.GetMaxPageForTeacher(pageInfo);
+
+            string url = Url.Link("GetQuizzes", null);
+
+            var pagingQuiz = new PagingQuizDTO
+            {
+                SearchValue = pageInfo.SearchValue,
+                CurrentPage = pageInfo.CurrentPage,
+                MaxPage = maxPage,
+                NextPage = pageInfo.CurrentPage >= maxPage ? null : $"{url}/GetQuizzesForTeacher?SearchValue={pageInfo.SearchValue}&CurrentPage={pageInfo.CurrentPage + 1}&MaxRecord={pageInfo.MaxRecord}",
+                PreviousPage = pageInfo.CurrentPage <= 1 ? null : $"{url}/GetQuizzesForTeacher?SearchValue={pageInfo.SearchValue}&CurrentPage={pageInfo.CurrentPage - 1}&MaxRecord={pageInfo.MaxRecord}",
+                Quizzes = quizzesDTO,
+            };
+
+            return Ok(pagingQuiz);
         }
         // GET: api/Quizzes/5
         //[HttpGet("{id}")]

@@ -3,11 +3,8 @@
 </div>
 <form (ngSubmit)="search()">
     <div class="form-group">
-        <input type="text" name="searchValue" class="form-control" placeholder="Search..." [(ngModel)]="searchValue">
-    </div>
-
-    <div class="form-group">
-        <button class="btn btn-outline-primary">Search</button>
+        <input type="text" name="searchValue" class="form-control" placeholder="Search..." style="width: 85%;display: inline-block;" [(ngModel)]="searchValue">
+        <button class="btn btn-outline-primary" style="width: 15%;">Search</button>
     </div>
 </form>
 <div class="col-12">
@@ -20,7 +17,7 @@
                     <td><b>Create Date</b></td>
                     <td><b>Duration</b></td>
                     <td><b>Max Point</b></td>
-                    <td><b>Is Expired</b></td>
+                    <td><b>Status</b></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -33,10 +30,10 @@
                     <td>{{quiz.duration}}</td>
                     <td>{{quiz.maxPoint}}</td>
                     <td>
-                        {{quiz.isExpire? "Yes" : "No"}}
+                        {{quiz.isExpire? "Closed" : "Opening"}}
                     </td>
                     <td><a class="btn btn-outline-success" (click)="view(quiz.quizId)">View Detail</a></td>
-                    <td><a class="btn btn-outline-danger" (click)="closeConfirm(close, quiz.quizId)">Delete</a></td>
+                    <td><a class="btn btn-outline-danger" (click)="closeConfirm(close, quiz.quizId)">Close</a></td>
                 </tr>
             </tbody>
         </table>

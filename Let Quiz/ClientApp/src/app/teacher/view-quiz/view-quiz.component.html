@@ -9,8 +9,10 @@
     </div>
     <div>
         <strong>Quiz Password: </strong>
-            <input type="{{hide ? 'password' : 'text' }}" class="form-control" name="password" value="{{quiz.password}}" readonly />
-            <button class="btn btn-outline-dark" (click)="show()">{{hide ? 'Show' : 'Hide' }}</button>
+        <div style="display: inline;">
+            <input type="{{hide ? 'password' : 'text' }}" class="form-control" style="width: 72%;display: inline-block;" name="password" value="{{quiz.password}}" readonly />
+            <button class="btn btn-outline-dark" style="width: 20%;" (click)="show()">{{hide ? 'Show' : 'Hide' }}</button>
+        </div>
     </div>
     <div>
         <strong>Create Date: </strong>
@@ -25,14 +27,14 @@
         <input type="text" class="form-control" name="maxPoint" value="{{quiz.maxPoint}}" readonly />
     </div>
     <div>
-        <strong>Is Expired: </strong>
-        <input type="text" class="form-control" name="isExpire" value="{{quiz.isExpire ? 'Yes' : 'No' }}" readonly />
+        <strong>Status: </strong>
+        <input type="text" class="form-control" name="isExpire" value="{{quiz.isExpire ? 'Closed' : 'Opening' }}" readonly />
     </div><br />
 </div><br />
 <div class="center-button">
     <div class="inline">
-        <a class="btn btn-outline-primary button" (click)="open(change, quiz.password)">Change Password</a>
-        <a class="btn btn-outline-info button" (click)="reOpen(reopen)">Re-Open Quiz</a>
+        <a class="btn btn-outline-primary button around-the-button" (click)="open(change, quiz.password)">Change Password</a>
+        <a class="btn btn-outline-primary button around-the-button" (click)="reOpen(reopen)">Re-Open Quiz</a>
     </div>
 </div>
 <!--change password-->
@@ -99,7 +101,7 @@
                 <h5 class="card-title"><strong>Q{{i + 1}}:</strong>   {{question.content}}</h5>
                 <h6>Answers:</h6>
                 <ol type="A">
-                    <li *ngFor='let answer of question.answers' class="{{answer.isCorrect? 'text-danger' : ''}}">{{answer.content}}</li>
+                    <li *ngFor='let answer of question.answers' class="{{answer.isCorrect? 'text-success' : ''}}">{{answer.content}}</li>
                 </ol>
             </div>
         </div>

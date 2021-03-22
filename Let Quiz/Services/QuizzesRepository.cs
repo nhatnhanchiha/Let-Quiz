@@ -40,7 +40,28 @@ namespace Let_Quiz.Services
                     Name = q.Account.Name
                 },
                 IsExpire = q.IsExpire
-            }).Where(q => q.IsExpire == false && q.Name.Contains(pageInfo.SearchValue)).Skip(offset).Take(pageInfo.MaxRecord).ToList();
+            }).Where(q => q.IsExpire == false && q.Name.Contains(pageInfo.SearchValue)).OrderByDescending(q => q.CreateDate).Skip(offset).Take(pageInfo.MaxRecord).ToList();
+
+            return quizzes;
+        }
+        public IEnumerable<Quiz> GetQuizzesForTeacher(PageInfoDTO pageInfo)
+        {
+            int offset = (pageInfo.CurrentPage - 1) * pageInfo.MaxRecord;
+
+            var quizzes = _letQuizContext.Quizzes.Select(q => new Quiz
+            {
+                QuizId = q.QuizId,
+                Name = q.Name,
+                Password = q.Password,
+                CreateDate = q.CreateDate,
+                Duration = q.Duration,
+                MaxPoint = q.MaxPoint,
+                Account = new Account
+                {
+                    Name = q.Account.Name
+                },
+                IsExpire = q.IsExpire
+            }).Where(q => q.Name.Contains(pageInfo.SearchValue)).OrderByDescending(q => q.CreateDate).Skip(offset).Take(pageInfo.MaxRecord).ToList();
 
             return quizzes;
         }
@@ -48,6 +69,12 @@ namespace Let_Quiz.Services
         public int GetMaxPage(PageInfoDTO pageInfo)
         {
             var numRecord = _letQuizContext.Quizzes.Where(q => q.IsExpire == false && q.Name.Contains(pageInfo.SearchValue)).Count();
+
+            return (int)Math.Ceiling((numRecord * 1.0) / pageInfo.MaxRecord);
+        }
+        public int GetMaxPageForTeacher(PageInfoDTO pageInfo)
+        {
+            var numRecord = _letQuizContext.Quizzes.Where(q => q.Name.Contains(pageInfo.SearchValue)).Count();
 
             return (int)Math.Ceiling((numRecord * 1.0) / pageInfo.MaxRecord);
         }
