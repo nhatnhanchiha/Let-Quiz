@@ -27,7 +27,7 @@ export class TeacherIndexComponent implements OnInit {
     private maxRecord = 5;
     quizID: number;
     err: string;
-
+    showMessage: string;
     constructor(private quizService: QuizService, private router: Router, private modalService: NgbModal) { }
 
     ngOnInit() {
@@ -59,7 +59,7 @@ export class TeacherIndexComponent implements OnInit {
         this.modalService.open(close);
     }
 
-    closeQuiz() {
+    closeQuiz(message) {
         let token: string = sessionStorage.getItem('token');
         this.quizService.getQuizDetail(this.quizID, token).subscribe((data: Quiz) => {
             if (data.isExpire) {
@@ -67,7 +67,9 @@ export class TeacherIndexComponent implements OnInit {
             } else {
                 this.quizService.closeQuiz(data.quizId, token).subscribe(() => {
                     this.modalService.dismissAll();
-                    alert("Close quiz successful!");
+                    this.showMessage = "Close quiz successful!";
+                    this.modalService.open(message);
+                    //alert("Close quiz successful!");
                     this.ngOnInit();
                 }); 
             }

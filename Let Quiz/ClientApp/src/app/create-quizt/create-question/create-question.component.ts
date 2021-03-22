@@ -28,6 +28,7 @@ export class CreateQuestionComponent implements OnInit {
         content: "",
         isCorrect: true
     };
+    massageCreateQuizt: string;
     constructor(private router: Router, private modalService: NgbModal) {     }
     errorCreateQuestion: string;
     ngOnInit() {
@@ -58,7 +59,7 @@ export class CreateQuestionComponent implements OnInit {
         this.otherChoice.splice(index, 1);
         this.otherChoices.splice(index, 1);
     }
-    onSubmit(error) {
+    onSubmit(error,message) {
         if (this.otherChoice.includes(this.correctAnswer)) {
             this.errorCreateQuestion = "Plase enter correct answer disferrence other choice";
             this.modalService.open(error);
@@ -77,6 +78,8 @@ export class CreateQuestionComponent implements OnInit {
                 this.question.questionId = this.listQuestion.length;
                 this.listQuestion.push(this.question);
                 sessionStorage.setItem('listQuestion', JSON.stringify(this.listQuestion));
+                this.massageCreateQuizt = "add question successful";
+                this.modalService.open(message);
                 this.router.navigate(['/createQuizt']);
             }
         }

@@ -85,15 +85,19 @@ namespace Let_Quiz.Controllers
         }
 
         [Authorize(Roles = "True")]
-        [HttpPut("change-password/{quizID}/{password}")]
-        public ActionResult ChangeQuizPassword(int quizID, string password)
+        [HttpPut("change-password")]
+        public ActionResult ChangeQuizPassword([FromBody] PasswordQuizDTO pq)
         {
-            var quiz = _quizzesRepository.GetQuiz(quizID);
+            if(pq.Password == null)
+            {
+                pq.Password = "";
+            }
+            var quiz = _quizzesRepository.GetQuiz(pq.QuizId);
             if (quiz == null)
             {
                 return BadRequest();
             }
-            quiz.Password = password;
+            quiz.Password = pq.Password;
 
             _quizzesRepository.UpdateQuiz(quiz);
 

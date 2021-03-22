@@ -21,6 +21,7 @@ export class CreateQuiztComponent implements OnInit {
     listQuestion: Question[];
     constructor(private quiztService: QuizService, private questionService: QuestionService, private router: Router, private modalService: NgbModal) {     }
     errorCreateQuzt: string;
+    massageCreateQuizt: string;
     ngOnInit() {
         this.listQuestion = JSON.parse(sessionStorage.getItem('listQuestion'));
         if (this.listQuestion == null) {
@@ -59,7 +60,7 @@ export class CreateQuiztComponent implements OnInit {
         sessionStorage.setItem('quizt', JSON.stringify(this.quiz));
         this.router.navigate(['/createQuestion'])
     }
-    onSubmit(error) {
+    onSubmit(error,message) {
         if (this.listQuestion != null) {
             if (this.listQuestion.length == 0) {
                 this.errorCreateQuzt = "can't Create you must add question";
@@ -97,6 +98,8 @@ export class CreateQuiztComponent implements OnInit {
                 }
                 this.quiztService.insertQuizzes(quizt, token).subscribe(
                     (data: Quiz) => {
+                        this.massageCreateQuizt = "Create quiz successful";
+                        this.modalService.open(message);
                         this.router.navigate(['teacher-index']);
                     }
                 );

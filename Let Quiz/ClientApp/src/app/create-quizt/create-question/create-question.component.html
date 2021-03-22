@@ -1,41 +1,42 @@
 <div class="welcome_teacher center">Create Questions</div>
 <div class="form-question">
-        <p class="h3 text-center"></p>
-        <div class="form-group">
-            <strong>Content Question:</strong>
-            <input type="text" name="QuizName" [(ngModel)]="question.content" class="form-control"
-                   maxlength="500" required
-                   placeholder="Content Question">
-        </div>
+    <p class="h3 text-center"></p>
+    <div class="form-group">
+        <strong>Content Question:</strong>
+        <input type="text" name="QuizName" [(ngModel)]="question.content" class="form-control"
+               maxlength="500" required
+               placeholder="Content Question">
+    </div>
 
-        <div class="form-group">
-            <strong>Correct answer: :</strong>
-            <input type="text" name="correctAnswer" [(ngModel)]="correctAnswer" class="form-control"
-                   maxlength="500" required
-                   placeholder="Correct answer:">
-        </div>
+    <div class="form-group">
+        <strong>Correct answer: :</strong>
+        <input type="text" name="correctAnswer" [(ngModel)]="correctAnswer" class="form-control"
+               maxlength="500" required
+               placeholder="Correct answer:">
+    </div>
 
-        <div class="form-group" style="width: 100%;">
-            <strong>Other answer: :</strong>
-            <div class="inline" style="width: 100%;">
-                <input type="text" name="txtOtherAnswer" [(ngModel)]="otherAnswer"
-                       maxlength="500" style="width: 85%;"
-                       placeholder="Other answer:">
-                <a class="btn btn-outline-success" style="width: 15%;" (click)="addChocie(error)">+</a>
-            </div>
+    <div class="form-group" style="width: 100%;">
+        <strong>Other answer: :</strong>
+        <div class="inline" style="width: 100%;">
+            <input type="text" name="txtOtherAnswer" [(ngModel)]="otherAnswer"
+                   maxlength="500" style="width: 85%;"
+                   placeholder="Other answer:">
+            <a class="btn btn-outline-success" style="width: 15%;" (click)="addChocie(error)">+</a>
         </div>
-        <form *ngFor="let fg of otherChoice">
-            <div class="inline" style="width: 100%;">
-                <input type="text" id="otherchoice" name="txtOther" value="{{fg}}" style="width: 85%;">
-                <a class="btn btn-outline-danger" (click)="removeChocie(fg)" style="width: 15%;">-</a>
-            </div>
-        </form>
+    </div>
+    <form *ngFor="let fg of otherChoice">
+        <div class="inline" style="width: 100%;">
+            <input type="text" id="otherchoice" name="txtOther" value="{{fg}}" style="width: 85%;">
+            <a class="btn btn-outline-danger" (click)="removeChocie(fg)" style="width: 15%;">-</a>
+        </div>
+    </form>
 </div>
 <div class="center-button">
     <div class="inline">
-        <a class="btn btn-outline-primary button" (click)="onSubmit(error)">Add Question</a>
+        <a class="btn btn-outline-primary button" (click)="onSubmit(error,message)">Add Question</a>
     </div>
 </div>
+
 <!--form show error-->
 <ng-template #error let-c="close" let-d="dismiss">
     <form class="form">
@@ -47,4 +48,12 @@
     </form>
 </ng-template>
 
+<!--form show success-->
+<ng-template #message let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="form-group" style="text-align:center;">
+            <p class="text-success">{{ massageCreateQuizt }}</p>
+        </div>
+    </div>
+</ng-template>
 

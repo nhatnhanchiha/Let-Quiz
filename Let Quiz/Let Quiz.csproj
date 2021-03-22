@@ -35,8 +35,16 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="ClientApp\src\app\models\PasswordQuiz.ts" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\LetQuiz.Data\LetQuiz.Data.csproj" />
       <ProjectReference Include="..\LetQuiz.Domain\LetQuiz.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <TypeScriptCompile Include="ClientApp\src\app\models\PasswordQuiz.ts" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

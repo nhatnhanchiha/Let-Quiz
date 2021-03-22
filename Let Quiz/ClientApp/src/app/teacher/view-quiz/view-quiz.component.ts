@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Quiz } from '../../models/Quiz';
+import { PasswordQuiz } from '../../models/PasswordQuiz';
 import { Question } from '../../models/Question';
 import { QuizService } from '../../services/QuizService';
 import { QuestionService } from '../../services/QuestionService';
@@ -22,7 +23,7 @@ export class ViewQuizDetail implements OnInit {
     OldPassword: string = "";
     NewPassword: string = "";
     errPassword: string = "";
-
+    showMessage: string;
     constructor(private quizService: QuizService, private questionService: QuestionService, private router: Router, private modalService: NgbModal) { }
 
     ngOnInit() {
@@ -54,17 +55,21 @@ export class ViewQuizDetail implements OnInit {
         this.hide = !this.hide;
     }
 
-    submit() {
-        if ("" === this.NewPassword) {
-            this.errPassword = "New password is not allow empty!";
-        } else if (this.OldPassword === this.NewPassword) {
+    submit(message) {
+        if (this.OldPassword === this.NewPassword) {
             this.errPassword = "New password is duplicate with old password";
         } else {
             let token: string = sessionStorage.getItem('token');
-            this.quizService.changePassword(this.quizID.toString(), this.NewPassword, token).subscribe(() => {
+            let password: PasswordQuiz = {
+                quizId: this.quizID,
+                password: this.NewPassword
+            }
+            this.quizService.changePassword(password, token).subscribe(() => {
                 this.modalService.dismissAll();
                 this.NewPassword = "";
-                alert("Change password successful!");
+                this.showMessage = "Change password successful!";
+                this.modalService.open(message);
+                //alert("Change password successful!");
                 this.ngOnInit();   
             });
         }
@@ -75,13 +80,15 @@ export class ViewQuizDetail implements OnInit {
         this.modalService.open(reopen);
     }
 
-    reOpenQuiz() {
+    reOpenQuiz(message) {
         if (this.quiz.isExpire) {
             let token: string = sessionStorage.getItem('token');
             this.quizService.openQuiz(this.quizID.toString(), token).subscribe(() => {
                 this.modalService.dismissAll();
                 this.ngOnInit();
-                alert("Re-open quiz successful!");
+                this.showMessage = "Re-open quiz successful!";
+                this.modalService.open(message);
+                //alert("Re-open quiz successful!");
             });
         } else {
             this.errPassword = "This quiz is in opening!";

@@ -1,5 +1,6 @@
 import { PagingQuiz } from './../models/PagingQuiz';
 import { Quiz } from './../models/Quiz';
+import { PasswordQuiz } from './../models/PasswordQuiz';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from "@angular/core";
@@ -78,8 +79,8 @@ export class QuizService {
         });
     }
 
-    changePassword(quizID: string, password: string, token: string) {
-        return this.http.put(this.url + "/change-password/" + quizID + "/" + password, null, {
+    changePassword(password: PasswordQuiz, token: string) {
+        return this.http.put(this.url + "/change-password",password, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

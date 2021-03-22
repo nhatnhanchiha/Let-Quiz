@@ -62,9 +62,16 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="closeQuiz()">Yes</button>
+        <button type="button" class="btn btn-primary" (click)="closeQuiz(message)">Yes</button>
         <button type="button" class="btn btn-secondary" (click)="d('Cross click')">No</button>
     </div>
 </ng-template>
-
+<!--message form-->
+<ng-template #message let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="form-group" style="text-align:center">
+            <p class="text-success">{{ showMessage }}</p>
+        </div>
+    </div>
+</ng-template>
 
