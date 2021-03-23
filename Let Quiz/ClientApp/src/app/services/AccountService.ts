@@ -55,7 +55,7 @@ export class AccountService {
 
     getProfile() {
         const token = sessionStorage.getItem('token');
-        return this.http.get<Account>(this.urlAccount + '/student/profile', {
+        return this.http.get<Account>(this.urlAccount + '/profile', {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -65,7 +65,7 @@ export class AccountService {
 
     updateProfile(model: any) {
         const token = sessionStorage.getItem('token');
-        return this.http.put<Account>(this.urlAccount + '/student/update-profile', model, {
+        return this.http.put<Account>(this.urlAccount + '/update-profile', model, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

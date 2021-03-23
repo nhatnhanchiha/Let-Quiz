@@ -17,6 +17,7 @@ import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {StudentProfileComponent} from './student/student-profile/student-profile.component';
+import {TeacherProfileComponent } from './teacher/teacher-profile/teacher-profile.component';
 import {StudentNavComponent} from './student/student-nav/student-nav.component';
 import { StudentAuthGuard } from './_guard/student-auth.guard';
 import { TeacherAuthGuard } from './_guard/teacher-auth.guard';
@@ -38,7 +39,8 @@ import {StudentHistoryDetailComponent} from './student/student-history-detail/st
         StudentQuizResultComponent,
         ViewQuizDetail,
         CreateQuiztComponent,
-        CreateQuestionComponent
+        CreateQuestionComponent,
+        TeacherProfileComponent
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -68,6 +70,7 @@ import {StudentHistoryDetailComponent} from './student/student-history-detail/st
                 canActivate: [TeacherAuthGuard],
                 children: [
                     { path: 'teacher-index', component: TeacherIndexComponent },
+                    { path: 'teacher/profile', component: TeacherProfileComponent },
                     { path: 'view-quiz-detail', component: ViewQuizDetail }
                 ]
             },

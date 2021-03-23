@@ -22,9 +22,16 @@
                     </ng-container>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/student/profile" routerLinkActive="active">{{account.name}}</a>
-                    </li>
+                    <ng-container *ngIf="!account.isTeacher">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/student/profile" routerLinkActive="active">{{account.name}}</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="account.isTeacher">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/teacher/profile" routerLinkActive="active">{{account.name}}</a>
+                        </li>
+                    </ng-container>
                     <li class="nav-item">
                         <a class="nav-link" (click)="logout()" style="cursor: pointer">Log out</a>
                     </li>
