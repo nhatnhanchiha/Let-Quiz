@@ -7,6 +7,9 @@
             <div class="alert alert-info" *ngIf="editForm.dirty">
                 <strong>Information: </strong> You have made changes. Any unsaved changes will be lost!
             </div>
+            <div class="alert alert-info" *ngIf="status">
+                {{status}}
+            </div>
         </div>
         <div class="col-4">
             <div class="card">
@@ -32,16 +35,37 @@
             <form [formGroup]='editForm' id="editForm" (ngSubmit)="updateProfile()" autocomplete="off">
                 <div class="form-group">
                     <h4>Name</h4>
-                    <input type="text" name="name" class="form-control" [formControl]="editForm.controls['name']">
+                    <input type="text" name="name" class="form-control" id="editName" [formControl]="editForm.controls['name']">
                     <span class="text-danger">{{nameErr}}</span>
                 </div>
                 <div class="form-group">
                     <h4 class="mt-2">Password</h4>
                     <input type="password" name="password" class="form-control" [formControl]="editForm.controls['password']">
+                    <a class="btn btn-link text-info" (click)="changePasswordClick()">Change Password</a>
                     <span class="text-danger">{{passErr}}</span>
                 </div>
                 <button [disabled]="!editForm.dirty" class="btn btn-info">Save Changes</button>
             </form>
+            <form [formGroup]='changePasswordForm' autocomplete="off"  id="changePassForm" class="d-none">
+                <div class="form-group">
+                    <h4>Current password</h4>
+                    <input type="text" name="name" class="form-control" [formControl]="changePasswordForm.controls['currentPassword']">
+                    <span class="text-danger">{{currentPasswordError}}</span>
+                </div>
+                <div class="form-group">
+                    <h4>Current password</h4>
+                    <input type="text" name="name" class="form-control" [formControl]="changePasswordForm.controls['newPassword']">
+                    <span class="text-danger">{{newPasswordError}}</span>
+                </div>
+                <div class="form-group">
+                    <h4 class="mt-2">New password</h4>
+                    <input type="password" name="password" class="form-control" [formControl]="changePasswordForm.controls['confirmNewPassword']">
+                    <span class="text-danger">{{confirmPasswordError}}</span>
+                </div>
+                <button [disabled]="!changePasswordForm.dirty" class="btn btn-info" (click)="updatePassword()">Save Changes</button>
+                <button class="btn btn-secondary ml-2" (click)="cancelChangPassword()">Cancel</button>
+            </form>
         </div>
+
     </div>
 </div>

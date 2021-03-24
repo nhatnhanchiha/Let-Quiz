@@ -88,5 +88,25 @@ namespace Let_Quiz.Controllers
 
             return NoContent();
         }
+
+        [Authorize(Roles = "False")]
+        [HttpPut("student/update-password")]
+        public ActionResult UpdatePassword(UpdatePasswordDTO dto)
+        {
+            var username = User.FindFirst("UserName")?.Value;
+            var account = _accountsRepository.CheckLogin(username, dto.CurrentPassword);
+            if (account == null)
+            {
+                return BadRequest();
+            }
+
+            account.Password = dto.NewPassword;
+
+            _accountsRepository.Update(account);
+
+            _accountsRepository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

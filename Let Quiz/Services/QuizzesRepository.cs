@@ -154,6 +154,7 @@ namespace Let_Quiz.Services
                     });
                 }
             }
+
             _letQuizContext.Quizzes.Add(quiz);
             return _letQuizContext.SaveChanges() > 0;
         }

@@ -12,9 +12,14 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class StudentProfileComponent implements OnInit {
     // @ts-ignore
     @ViewChild('editForm') editForm: FormGroup;
+    changePasswordForm: FormGroup;
     account: Account;
     nameErr = '';
     passErr = '';
+    currentPasswordError = '';
+    newPasswordError = '';
+    confirmPasswordError = '';
+    status = '';
 
 
     @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
@@ -33,10 +38,64 @@ export class StudentProfileComponent implements OnInit {
     }
 
 
+    changePasswordClick() {
+        document.getElementById('editForm').classList.add('d-none')
+        document.getElementById('changePassForm').classList.remove('d-none')
+    }
+
     initialForm() {
         this.editForm = this.fb.group({
             name: [this.account.name],
             password: [''],
+        });
+        this.changePasswordForm = this.fb.group({
+            currentPassword: '',
+            newPassword: '',
+            confirmNewPassword: ''
+        })
+    }
+
+    updatePassword() {
+        let isValid = true;
+        this.status = '';
+        if (this.changePasswordForm.controls['currentPassword'].value.length <= 0) {
+            this.currentPasswordError = 'You must input current password'
+            isValid = false;
+        } else {
+            this.currentPasswordError = '';
+        }
+
+        if (this.changePasswordForm.controls['newPassword'].value.length <= 0) {
+            this.newPasswordError = 'You must input new password'
+            isValid = false;
+        } else {
+            this.newPasswordError = ''
+        }
+
+        if (this.changePasswordForm.controls['newPassword'].value != this.changePasswordForm.controls['confirmNewPassword'].value) {
+            this.confirmPasswordError = 'Confirm password is incorrect';
+            isValid = false;
+        } else {
+            this.confirmPasswordError = '';
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+        this.accountService.updatePassword(this.changePasswordForm.value).subscribe(() => {
+            this.accountService.getProfile().subscribe((account: Account) => {
+                this.account = account;
+                this.accountService.setCurrentAccount(account);
+                this.initialForm();
+                this.status = "Saved change!";
+            });
+        }, error => {
+            if (error.status === 400) {
+                this.currentPasswordError = "Wrong password!";
+            } else {
+                this.currentPasswordError = "Unhandle error, Please contact to admin";
+            }
         });
     }
 
@@ -49,6 +108,7 @@ export class StudentProfileComponent implements OnInit {
 
     updateProfile() {
         let isValid = true;
+        this.status = '';
         if (this.editForm.controls['name'].value.length <= 0) {
             this.nameErr = 'Name is required!';
             isValid = false;
@@ -68,6 +128,7 @@ export class StudentProfileComponent implements OnInit {
                     this.account = account;
                     this.accountService.setCurrentAccount(account);
                     this.initialForm();
+                    this.status = "Saved change!";
                 });
             }, error => {
                 if (error.status === 400) {
@@ -77,5 +138,15 @@ export class StudentProfileComponent implements OnInit {
                 }
             });
         }
+    }
+
+    cancelChangPassword() {
+        this.currentPasswordError = '';
+        this.newPasswordError = '';
+        this.confirmPasswordError = '';
+        this.status = '';
+        this.initialForm();
+        document.getElementById('editForm').classList.remove('d-none')
+        document.getElementById('changePassForm').classList.add('d-none')
     }
 }
