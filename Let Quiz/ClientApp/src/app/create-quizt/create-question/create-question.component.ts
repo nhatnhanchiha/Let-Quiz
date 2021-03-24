@@ -59,6 +59,13 @@ export class CreateQuestionComponent implements OnInit {
         this.otherChoice.splice(index, 1);
         this.otherChoices.splice(index, 1);
     }
+    cancel(cancelShowBox) {
+        this.modalService.open(cancelShowBox);
+    }
+    backcreatequiz() {
+        this.router.navigate(['/createQuizt']);
+        this.modalService.dismissAll();
+    }
     onSubmit(error,message) {
         if (this.otherChoice.includes(this.correctAnswer)) {
             this.errorCreateQuestion = "Plase enter correct answer disferrence other choice";
@@ -75,7 +82,7 @@ export class CreateQuestionComponent implements OnInit {
                 for (let s of this.otherChoices) {
                     this.question.answers.push(s);
                 }
-                this.question.questionId = this.listQuestion.length;
+                this.question.questionId = 0;
                 this.listQuestion.push(this.question);
                 sessionStorage.setItem('listQuestion', JSON.stringify(this.listQuestion));
                 this.massageCreateQuizt = "add question successful";

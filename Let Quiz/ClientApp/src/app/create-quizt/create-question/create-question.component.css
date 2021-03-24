@@ -42,4 +42,11 @@ a {
 .center-button {
     width: 100%;
     text-align: center;
+    padding: 30px;
+}
+
+.around-the-button {
+    margin: 30px;
+    margin-top: 5px;
+    width: 15%;
 }

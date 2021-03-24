@@ -33,7 +33,8 @@
 </div>
 <div class="center-button">
     <div class="inline">
-        <a class="btn btn-outline-primary button" (click)="onSubmit(error,message)">Add Question</a>
+        <a class="btn btn-outline-primary button around-the-button" (click)="onSubmit(error,message)">Add Question</a>
+        <a class="btn btn-outline-primary button around-the-button" (click)="cancel(cancelShowBox)">Cancel</a>
     </div>
 </div>
 
@@ -53,6 +54,19 @@
     <div class="modal-body">
         <div class="form-group" style="text-align:center;">
             <p class="text-success">{{ massageCreateQuizt }}</p>
+        </div>
+    </div>
+</ng-template>
+
+<!--form cancel-->
+<ng-template #cancelShowBox let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="form-group" style="text-align:center;">
+            <p class="text-success">Do you want cancel this question</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="backcreatequiz()">Yes</button>
+            <button type="button" class="btn btn-secondary" (click)="d('Cross click')">No</button>
         </div>
     </div>
 </ng-template>

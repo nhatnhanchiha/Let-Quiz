@@ -66,7 +66,13 @@ export class CreateQuiztComponent implements OnInit {
                 this.errorCreateQuzt = "can't Create you must add question";
                 this.modalService.open(error);
                 //confirm("can't Create you must add question");
-            } else {
+            } else if ("" === this.quiz.name) {
+                this.errorCreateQuzt = "can't Create you must enter quiz name";
+                this.modalService.open(error);
+            } else if (this.quiz.duration == 0) {
+                this.errorCreateQuzt = "can't Create you must enter quiz duration more 0";
+                this.modalService.open(error);
+            }else {
                 let token: string = sessionStorage.getItem('token');
                 let quizt: Quiz = {
                     quizId: 0,
