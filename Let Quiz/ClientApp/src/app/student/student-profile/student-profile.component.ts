@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {AccountService} from '../../services/AccountService';
 import {Account} from '../../models/Account';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {delay} from 'rxjs/operators';
 
 @Component({
     selector: 'app-student-profile',
@@ -39,8 +40,8 @@ export class StudentProfileComponent implements OnInit {
 
 
     changePasswordClick() {
-        document.getElementById('editForm').classList.add('d-none')
-        document.getElementById('changePassForm').classList.remove('d-none')
+        document.getElementById('editForm').classList.add('d-none');
+        document.getElementById('changePassForm').classList.remove('d-none');
     }
 
     initialForm() {
@@ -52,24 +53,24 @@ export class StudentProfileComponent implements OnInit {
             currentPassword: '',
             newPassword: '',
             confirmNewPassword: ''
-        })
+        });
     }
 
     updatePassword() {
         let isValid = true;
         this.status = '';
         if (this.changePasswordForm.controls['currentPassword'].value.length <= 0) {
-            this.currentPasswordError = 'You must input current password'
+            this.currentPasswordError = 'You must input current password';
             isValid = false;
         } else {
             this.currentPasswordError = '';
         }
 
         if (this.changePasswordForm.controls['newPassword'].value.length <= 0) {
-            this.newPasswordError = 'You must input new password'
+            this.newPasswordError = 'You must input new password';
             isValid = false;
         } else {
-            this.newPasswordError = ''
+            this.newPasswordError = '';
         }
 
         if (this.changePasswordForm.controls['newPassword'].value != this.changePasswordForm.controls['confirmNewPassword'].value) {
@@ -84,17 +85,22 @@ export class StudentProfileComponent implements OnInit {
         }
 
         this.accountService.updatePassword(this.changePasswordForm.value).subscribe(() => {
+            let done = false;
             this.accountService.getProfile().subscribe((account: Account) => {
                 this.account = account;
                 this.accountService.setCurrentAccount(account);
                 this.initialForm();
-                this.status = "Saved change!";
+                this.status = 'Saved change!';
+                done = true;
             });
+            if (!done) {
+                delay(1000)
+            }
         }, error => {
             if (error.status === 400) {
-                this.currentPasswordError = "Wrong password!";
+                this.currentPasswordError = 'Wrong password!';
             } else {
-                this.currentPasswordError = "Unhandle error, Please contact to admin";
+                this.currentPasswordError = 'Unhandle error, Please contact to admin';
             }
         });
     }
@@ -124,29 +130,34 @@ export class StudentProfileComponent implements OnInit {
 
         if (isValid) {
             this.accountService.updateProfile(this.editForm.value).subscribe(() => {
+                let done = false;
                 this.accountService.getProfile().subscribe((account: Account) => {
                     this.account = account;
                     this.accountService.setCurrentAccount(account);
                     this.initialForm();
-                    this.status = "Saved change!";
+                    this.status = 'Saved change!';
+                    done = true;
                 });
+                if (!done) {
+                    delay(1000)
+                }
             }, error => {
                 if (error.status === 400) {
-                    this.passErr = "Wrong password!";
+                    this.passErr = 'Wrong password!';
                 } else {
-                    this.passErr = "Unhandle error, Please contact to admin";
+                    this.passErr = 'Unhandle error, Please contact to admin';
                 }
             });
         }
     }
 
-    cancelChangPassword() {
+    cancelChangePassword() {
         this.currentPasswordError = '';
         this.newPasswordError = '';
         this.confirmPasswordError = '';
         this.status = '';
         this.initialForm();
-        document.getElementById('editForm').classList.remove('d-none')
-        document.getElementById('changePassForm').classList.add('d-none')
+        document.getElementById('editForm').classList.remove('d-none');
+        document.getElementById('changePassForm').classList.add('d-none');
     }
 }
