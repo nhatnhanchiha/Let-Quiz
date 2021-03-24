@@ -85,5 +85,6 @@ export class AccountService {
 
     setCurrentAccount(account: Account) {
         this.currentAccountSource.next(account);
+        sessionStorage.setItem('account', JSON.stringify(account));
     }
 }

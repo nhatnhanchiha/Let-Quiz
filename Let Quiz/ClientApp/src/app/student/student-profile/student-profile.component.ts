@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {AccountService} from '../../services/AccountService';
 import {Account} from '../../models/Account';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {delay} from 'rxjs/operators';
 
 @Component({
     selector: 'app-student-profile',
@@ -85,17 +84,11 @@ export class StudentProfileComponent implements OnInit {
         }
 
         this.accountService.updatePassword(this.changePasswordForm.value).subscribe(() => {
-            let done = false;
             this.accountService.getProfile().subscribe((account: Account) => {
                 this.account = account;
                 this.accountService.setCurrentAccount(account);
-                this.initialForm();
-                this.status = 'Saved change!';
-                done = true;
             });
-            if (!done) {
-                delay(1000)
-            }
+
         }, error => {
             if (error.status === 400) {
                 this.currentPasswordError = 'Wrong password!';
@@ -112,7 +105,7 @@ export class StudentProfileComponent implements OnInit {
         });
     }
 
-    updateProfile() {
+    async updateProfile() {
         let isValid = true;
         this.status = '';
         if (this.editForm.controls['name'].value.length <= 0) {
@@ -127,20 +120,10 @@ export class StudentProfileComponent implements OnInit {
         } else {
             this.passErr = '';
         }
-
+        let isSuccess = false;
         if (isValid) {
-            this.accountService.updateProfile(this.editForm.value).subscribe(() => {
-                let done = false;
-                this.accountService.getProfile().subscribe((account: Account) => {
-                    this.account = account;
-                    this.accountService.setCurrentAccount(account);
-                    this.initialForm();
-                    this.status = 'Saved change!';
-                    done = true;
-                });
-                if (!done) {
-                    delay(1000)
-                }
+            await this.accountService.updateProfile(this.editForm.value).toPromise().then(() => {
+                isSuccess = true;
             }, error => {
                 if (error.status === 400) {
                     this.passErr = 'Wrong password!';
@@ -148,6 +131,12 @@ export class StudentProfileComponent implements OnInit {
                     this.passErr = 'Unhandle error, Please contact to admin';
                 }
             });
+            if (isSuccess) {
+                await this.accountService.getProfile().toPromise().then((account: Account) => {
+                    this.account = account;
+                    this.accountService.setCurrentAccount(this.account);
+                });
+            }
         }
     }
 
