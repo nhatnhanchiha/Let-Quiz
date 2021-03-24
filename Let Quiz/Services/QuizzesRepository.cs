@@ -152,11 +152,32 @@ namespace Let_Quiz.Services
                         Content = awnser.Content,
                         IsCorrect = awnser.IsCorrect
                     });
+                    quiz.Questions.ElementAt<Question>(quiz.Questions.Count - 1).Answers = ShuffleList<AnswerDTO>(quiz.Questions.ElementAt<Question>(quiz.Questions.Count - 1).Answers);
                 }
             }
 
             _letQuizContext.Quizzes.Add(quiz);
             return _letQuizContext.SaveChanges() > 0;
+        }
+        private List<Answer> ShuffleList<T>(List<Answer> answers)
+        {
+            List<Answer> list = new List<Answer>();
+            Random rnd = new Random();
+            int totalItem = answers.Count;
+            Answer obj;
+            while (totalItem >= 1)
+            {
+                totalItem -= 1;
+                int nextIndex = rnd.Next(totalItem, answers.Count);
+                obj = answers[nextIndex];
+                answers[nextIndex] = answers[totalItem];
+                answers[totalItem] = obj;
+            }
+            foreach (Answer x in answers)
+            {
+                list.Add(x);
+            }
+            return list;
         }
     }
 }
