@@ -89,8 +89,8 @@ namespace Let_Quiz.Controllers
             return NoContent();
         }
 
-        [Authorize(Roles = "False")]
-        [HttpPut("student/update-password")]
+        [Authorize]
+        [HttpPut("update-password")]
         public ActionResult UpdatePassword(UpdatePasswordDTO dto)
         {
             var username = User.FindFirst("UserName")?.Value;

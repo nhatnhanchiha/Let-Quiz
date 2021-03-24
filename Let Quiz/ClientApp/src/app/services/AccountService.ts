@@ -75,7 +75,7 @@ export class AccountService {
 
     updatePassword(model: any) {
         const token = sessionStorage.getItem('token');
-        return this.http.put<Account>(this.urlAccount + '/student/update-password', model, {
+        return this.http.put<Account>(this.urlAccount + '/update-password', model, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
