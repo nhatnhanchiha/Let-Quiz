@@ -36,6 +36,11 @@ export class RegisterComponent {
             this.errCondit = true;   
         }
 
+        if (this.newAccount.username.indexOf(' ') >= 0) {
+            this.msgErrorUserName = "Username cannot contain spaces";
+            this.errCondit = true;
+        }
+
         if(this.errCondit === false) {
             this.accountService.register(this.newAccount).subscribe(
                 (data: Account) => this.router.navigate(['/login'])
