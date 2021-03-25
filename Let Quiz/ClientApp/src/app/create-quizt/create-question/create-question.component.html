@@ -26,7 +26,7 @@
     </div>
     <form *ngFor="let fg of otherChoice">
         <div class="inline" style="width: 100%;">
-            <input type="text" id="otherchoice" name="txtOther" value="{{fg}}" style="width: 85%;">
+            <input type="text" id="otherchoice" name="txtOther" disabled value="{{fg}}" style="width: 85%;">
             <a class="btn btn-outline-danger" (click)="removeChocie(fg)" style="width: 15%;">-</a>
         </div>
     </form>
