@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="MSSQL" family-id="MSSQL" format-version="4.20">
     <root id="1">
       <ServerVersion>15.0.2080</ServerVersion>
-      <PermissionsCheckSum>43840690911</PermissionsCheckSum>
+      <PermissionsCheckSum>43840689887</PermissionsCheckSum>
       <Grants>0|root||1|connect sql|G
 0|root||2|view any database|G
 0|root||101|view any definition|G
@@ -30,24 +30,25 @@
 0|root||265|connect sql|G
 0|root||265|view any definition|G
 0|root||265|view server state|G
-0|root||268|connect sql|G
-0|root||269|connect sql|G
+0|root||266|connect sql|G
+0|root||267|connect sql|G
 2|||2|connect|G
 3|||2|connect|G
 4|||2|connect|G
 5|||2|connect|G
 </Grants>
     </root>
-    <database id="2" parent="1" name="BethanysPieShop">
-      <ObjectId>8</ObjectId>
-    </database>
-    <database id="3" parent="1" name="BookStore">
-      <ObjectId>10</ObjectId>
-    </database>
-    <database id="4" parent="1" name="HanaShop">
+    <database id="2" parent="1" name="LetQuiz">
       <ObjectId>5</ObjectId>
+      <PermissionsCheckSum>3196235284</PermissionsCheckSum>
+      <Grants>5|database||0|view any column encryption key definition|G
+5|database||0|view any column master key definition|G
+5|database||1|connect|G
+</Grants>
+      <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
+      <Fingerprint>1.37717/00000000-0000-0000-0000-000000000000@DESKTOP-1MRN3RD\SQLEXPRESS</Fingerprint>
     </database>
-    <database id="5" parent="1" name="LetQuiz">
+    <database id="3" parent="1" name="book-store">
       <ObjectId>6</ObjectId>
       <PermissionsCheckSum>3196235284</PermissionsCheckSum>
       <Grants>6|database||0|view any column encryption key definition|G
@@ -56,533 +57,517 @@
 </Grants>
       <Fingerprint>1.37717/00000000-0000-0000-0000-000000000000@DESKTOP-1HEREUL\SQLEXPRESS</Fingerprint>
     </database>
-    <database id="6" parent="1" name="Manager">
-      <ObjectId>12</ObjectId>
-    </database>
-    <database id="7" parent="1" name="QuizOnline">
-      <ObjectId>9</ObjectId>
-    </database>
-    <database id="8" parent="1" name="SaleDB">
-      <ObjectId>13</ObjectId>
-    </database>
-    <database id="9" parent="1" name="SamuraiAppData">
-      <ObjectId>11</ObjectId>
-    </database>
-    <database id="10" parent="1" name="ScrapCollectionSystem">
-      <ObjectId>7</ObjectId>
-    </database>
-    <database id="11" parent="1" name="master">
+    <database id="4" parent="1" name="master">
       <ObjectId>1</ObjectId>
       <Current>1</Current>
       <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
     </database>
-    <database id="12" parent="1" name="model">
+    <database id="5" parent="1" name="model">
       <ObjectId>3</ObjectId>
       <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
     </database>
-    <database id="13" parent="1" name="msdb">
+    <database id="6" parent="1" name="msdb">
       <ObjectId>4</ObjectId>
       <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
     </database>
-    <database id="14" parent="1" name="tempdb">
+    <database id="7" parent="1" name="tempdb">
       <ObjectId>2</ObjectId>
       <Collation>SQL_Latin1_General_CP1_CI_AS</Collation>
     </database>
-    <login id="15" parent="1" name="sa">
+    <login id="8" parent="1" name="sa">
       <ObjectId>1</ObjectId>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="16" parent="1" name="public">
+    <login id="9" parent="1" name="public">
       <ObjectId>2</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="17" parent="1" name="sysadmin">
+    <login id="10" parent="1" name="sysadmin">
       <ObjectId>3</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="18" parent="1" name="securityadmin">
+    <login id="11" parent="1" name="securityadmin">
       <ObjectId>4</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="19" parent="1" name="serveradmin">
+    <login id="12" parent="1" name="serveradmin">
       <ObjectId>5</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="20" parent="1" name="setupadmin">
+    <login id="13" parent="1" name="setupadmin">
       <ObjectId>6</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="21" parent="1" name="processadmin">
+    <login id="14" parent="1" name="processadmin">
       <ObjectId>7</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="22" parent="1" name="diskadmin">
+    <login id="15" parent="1" name="diskadmin">
       <ObjectId>8</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="23" parent="1" name="dbcreator">
+    <login id="16" parent="1" name="dbcreator">
       <ObjectId>9</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="24" parent="1" name="bulkadmin">
+    <login id="17" parent="1" name="bulkadmin">
       <ObjectId>10</ObjectId>
       <Type>server-role</Type>
       <Enabled>1</Enabled>
     </login>
-    <login id="25" parent="1" name="##MS_SQLResourceSigningCertificate##">
+    <login id="18" parent="1" name="##MS_SQLResourceSigningCertificate##">
       <ObjectId>101</ObjectId>
       <Type>certificate-mapped-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="26" parent="1" name="##MS_SQLReplicationSigningCertificate##">
+    <login id="19" parent="1" name="##MS_SQLReplicationSigningCertificate##">
       <ObjectId>102</ObjectId>
       <Type>certificate-mapped-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="27" parent="1" name="##MS_SQLAuthenticatorCertificate##">
+    <login id="20" parent="1" name="##MS_SQLAuthenticatorCertificate##">
       <ObjectId>103</ObjectId>
       <Type>certificate-mapped-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="28" parent="1" name="##MS_PolicySigningCertificate##">
+    <login id="21" parent="1" name="##MS_PolicySigningCertificate##">
       <ObjectId>105</ObjectId>
       <Type>certificate-mapped-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="29" parent="1" name="##MS_SmoExtendedSigningCertificate##">
+    <login id="22" parent="1" name="##MS_SmoExtendedSigningCertificate##">
       <ObjectId>106</ObjectId>
       <Type>certificate-mapped-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="30" parent="1" name="##MS_PolicyTsqlExecutionLogin##">
+    <login id="23" parent="1" name="##MS_PolicyTsqlExecutionLogin##">
       <ObjectId>257</ObjectId>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="31" parent="1" name="DESKTOP-1HEREUL\nhatn">
+    <login id="24" parent="1" name="DESKTOP-1MRN3RD\nhatn">
       <ObjectId>259</ObjectId>
       <Type>windows-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="32" parent="1" name="NT SERVICE\SQLWriter">
+    <login id="25" parent="1" name="NT SERVICE\SQLWriter">
       <ObjectId>260</ObjectId>
       <Type>windows-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="33" parent="1" name="NT SERVICE\Winmgmt">
+    <login id="26" parent="1" name="NT SERVICE\Winmgmt">
       <ObjectId>261</ObjectId>
       <Type>windows-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="34" parent="1" name="NT Service\MSSQL$SQLEXPRESS">
+    <login id="27" parent="1" name="NT Service\MSSQL$SQLEXPRESS">
       <ObjectId>262</ObjectId>
       <Type>windows-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="35" parent="1" name="BUILTIN\Users">
+    <login id="28" parent="1" name="BUILTIN\Users">
       <ObjectId>263</ObjectId>
       <Type>windows-group</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="36" parent="1" name="NT AUTHORITY\SYSTEM">
+    <login id="29" parent="1" name="NT AUTHORITY\SYSTEM">
       <ObjectId>264</ObjectId>
       <Type>windows-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="37" parent="1" name="NT SERVICE\SQLTELEMETRY$SQLEXPRESS">
+    <login id="30" parent="1" name="NT SERVICE\SQLTELEMETRY$SQLEXPRESS">
       <ObjectId>265</ObjectId>
       <Type>windows-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="38" parent="1" name="##MS_PolicyEventProcessingLogin##">
+    <login id="31" parent="1" name="##MS_PolicyEventProcessingLogin##">
       <ObjectId>268</ObjectId>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <login id="39" parent="1" name="##MS_AgentSigningCertificate##">
+    <login id="32" parent="1" name="##MS_AgentSigningCertificate##">
       <ObjectId>269</ObjectId>
       <Type>certificate-mapped-login</Type>
       <Enabled>1</Enabled>
       <DefaultDatabase>master</DefaultDatabase>
     </login>
-    <schema id="40" parent="5" name="INFORMATION_SCHEMA">
+    <login id="33" parent="1" name="##MS_PolicyEventProcessingLogin##">
+      <ObjectId>266</ObjectId>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="34" parent="1" name="##MS_AgentSigningCertificate##">
+      <ObjectId>267</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <schema id="35" parent="2" name="INFORMATION_SCHEMA">
       <ObjectId>3</ObjectId>
     </schema>
-    <schema id="41" parent="5" name="db_accessadmin">
+    <schema id="36" parent="2" name="db_accessadmin">
       <ObjectId>16385</ObjectId>
     </schema>
-    <schema id="42" parent="5" name="db_backupoperator">
+    <schema id="37" parent="2" name="db_backupoperator">
       <ObjectId>16389</ObjectId>
     </schema>
-    <schema id="43" parent="5" name="db_datareader">
+    <schema id="38" parent="2" name="db_datareader">
       <ObjectId>16390</ObjectId>
     </schema>
-    <schema id="44" parent="5" name="db_datawriter">
+    <schema id="39" parent="2" name="db_datawriter">
       <ObjectId>16391</ObjectId>
     </schema>
-    <schema id="45" parent="5" name="db_ddladmin">
+    <schema id="40" parent="2" name="db_ddladmin">
       <ObjectId>16387</ObjectId>
     </schema>
-    <schema id="46" parent="5" name="db_denydatareader">
+    <schema id="41" parent="2" name="db_denydatareader">
       <ObjectId>16392</ObjectId>
     </schema>
-    <schema id="47" parent="5" name="db_denydatawriter">
+    <schema id="42" parent="2" name="db_denydatawriter">
       <ObjectId>16393</ObjectId>
     </schema>
-    <schema id="48" parent="5" name="db_owner">
+    <schema id="43" parent="2" name="db_owner">
       <ObjectId>16384</ObjectId>
     </schema>
-    <schema id="49" parent="5" name="db_securityadmin">
+    <schema id="44" parent="2" name="db_securityadmin">
       <ObjectId>16386</ObjectId>
     </schema>
-    <schema id="50" parent="5" name="dbo">
+    <schema id="45" parent="2" name="dbo">
       <ObjectId>1</ObjectId>
-      <IntrospectionTimestamp>2021-03-03.09:59:47.800</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2021-03-26.05:16:41.817</IntrospectionTimestamp>
       <Current>1</Current>
     </schema>
-    <schema id="51" parent="5" name="guest">
+    <schema id="46" parent="2" name="guest">
       <ObjectId>2</ObjectId>
     </schema>
-    <schema id="52" parent="5" name="sys">
+    <schema id="47" parent="2" name="sys">
       <ObjectId>4</ObjectId>
     </schema>
-    <role id="53" parent="5" name="public">
+    <role id="48" parent="2" name="public">
       <ObjectId>0</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="54" parent="5" name="dbo">
+    <role id="49" parent="2" name="dbo">
       <ObjectId>1</ObjectId>
+      <Type>windows-user</Type>
       <DefaultSchema>dbo</DefaultSchema>
-      <AuthType>instance</AuthType>
+      <AuthType>windows</AuthType>
     </role>
-    <role id="55" parent="5" name="guest">
+    <role id="50" parent="2" name="guest">
       <ObjectId>2</ObjectId>
       <DefaultSchema>guest</DefaultSchema>
       <AuthType>none</AuthType>
     </role>
-    <role id="56" parent="5" name="INFORMATION_SCHEMA">
+    <role id="51" parent="2" name="INFORMATION_SCHEMA">
       <ObjectId>3</ObjectId>
       <AuthType>none</AuthType>
     </role>
-    <role id="57" parent="5" name="sys">
+    <role id="52" parent="2" name="sys">
       <ObjectId>4</ObjectId>
       <AuthType>none</AuthType>
     </role>
-    <role id="58" parent="5" name="db_owner">
+    <role id="53" parent="2" name="db_owner">
       <ObjectId>16384</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="59" parent="5" name="db_accessadmin">
+    <role id="54" parent="2" name="db_accessadmin">
       <ObjectId>16385</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="60" parent="5" name="db_securityadmin">
+    <role id="55" parent="2" name="db_securityadmin">
       <ObjectId>16386</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="61" parent="5" name="db_ddladmin">
+    <role id="56" parent="2" name="db_ddladmin">
       <ObjectId>16387</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="62" parent="5" name="db_backupoperator">
+    <role id="57" parent="2" name="db_backupoperator">
       <ObjectId>16389</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="63" parent="5" name="db_datareader">
+    <role id="58" parent="2" name="db_datareader">
       <ObjectId>16390</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="64" parent="5" name="db_datawriter">
+    <role id="59" parent="2" name="db_datawriter">
       <ObjectId>16391</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="65" parent="5" name="db_denydatareader">
+    <role id="60" parent="2" name="db_denydatareader">
       <ObjectId>16392</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <role id="66" parent="5" name="db_denydatawriter">
+    <role id="61" parent="2" name="db_denydatawriter">
       <ObjectId>16393</ObjectId>
       <OwnerId>1</OwnerId>
       <Type>database-role</Type>
       <AuthType>none</AuthType>
     </role>
-    <table id="67" parent="50" name="Accounts">
+    <table id="62" parent="45" name="Accounts">
       <ObjectId>917578307</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.663</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+      <CreatedTimestamp>2021-03-25.22:24:25.230</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.653</ModifiedTimestamp>
     </table>
-    <table id="68" parent="50" name="Answers">
-      <ObjectId>1125579048</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.677</ModifiedTimestamp>
+    <table id="63" parent="45" name="Answers">
+      <ObjectId>949578421</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:25.553</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.250</ModifiedTimestamp>
     </table>
-    <table id="69" parent="50" name="Questions">
+    <table id="64" parent="45" name="Questions">
+      <ObjectId>981578535</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:25.963</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:38.863</ModifiedTimestamp>
+    </table>
+    <table id="65" parent="45" name="Quizzes">
       <ObjectId>1013578649</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.667</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.673</ModifiedTimestamp>
+      <CreatedTimestamp>2021-03-25.22:24:26.417</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.747</ModifiedTimestamp>
     </table>
-    <table id="70" parent="50" name="Quizzes">
-      <ObjectId>965578478</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.663</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.673</ModifiedTimestamp>
+    <table id="66" parent="45" name="ResultDetail">
+      <ObjectId>1045578763</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:26.713</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.440</ModifiedTimestamp>
     </table>
-    <table id="71" parent="50" name="ResultDetail">
-      <ObjectId>1173579219</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.673</ModifiedTimestamp>
+    <table id="67" parent="45" name="Results">
+      <ObjectId>1077578877</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:26.923</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.747</ModifiedTimestamp>
     </table>
-    <table id="72" parent="50" name="Results">
-      <ObjectId>1061578820</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.667</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.677</ModifiedTimestamp>
-    </table>
-    <table id="73" parent="50" name="__EFMigrationsHistory">
+    <table id="68" parent="45" name="__EFMigrationsHistory">
       <ObjectId>885578193</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.600</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.600</ModifiedTimestamp>
+      <CreatedTimestamp>2021-03-25.22:24:24.800</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:24.800</ModifiedTimestamp>
     </table>
-    <column id="74" parent="67" name="Username">
+    <column id="69" parent="62" name="Username">
       <Position>1</Position>
       <DataType>nvarchar(50 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="75" parent="67" name="Password">
+    <column id="70" parent="62" name="Password">
       <Position>2</Position>
       <DataType>nvarchar(30 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="76" parent="67" name="Name">
+    <column id="71" parent="62" name="Name">
       <Position>3</Position>
       <DataType>nvarchar(100 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="77" parent="67" name="IsTeacher">
+    <column id="72" parent="62" name="IsTeacher">
       <Position>4</Position>
       <DataType>bit|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="78" parent="67" name="Status">
+    <column id="73" parent="62" name="Status">
       <Position>5</Position>
-      <DefaultConstraintName>DF__Accounts__Status__38996AB5</DefaultConstraintName>
+      <DefaultConstraintName>DF__Accounts__Status__4222D4EF</DefaultConstraintName>
       <DefaultExpression>1</DefaultExpression>
       <DataType>bit|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="79" parent="67" name="PK_Accounts">
+    <index id="74" parent="62" name="PK_Accounts">
       <Position>1</Position>
       <ColNames>Username</ColNames>
       <Clustering>1</Clustering>
       <Unique>1</Unique>
     </index>
-    <key id="80" parent="67" name="PK_Accounts">
+    <key id="75" parent="62" name="PK_Accounts">
       <ObjectId>933578364</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.663</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.663</ModifiedTimestamp>
+      <CreatedTimestamp>2021-03-25.22:24:25.230</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:25.230</ModifiedTimestamp>
       <ColNames>Username</ColNames>
       <UnderlyingIndexName>PK_Accounts</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <default id="81" parent="67" name="DF__Accounts__Status__38996AB5">
-      <ObjectId>949578421</ObjectId>
+    <default id="76" parent="62" name="DF__Accounts__Status__4222D4EF">
+      <ObjectId>1109578991</ObjectId>
       <NameSurrogate>1</NameSurrogate>
-      <ModifiedTimestamp>2021-02-26.06:14:43.663</ModifiedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:38.550</ModifiedTimestamp>
       <ColNames>Status</ColNames>
       <DefaultExpression>1</DefaultExpression>
     </default>
-    <column id="82" parent="68" name="AnswerId">
+    <column id="77" parent="63" name="AnswerId">
       <Position>1</Position>
       <SequenceIdentity>1</SequenceIdentity>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="83" parent="68" name="Content">
+    <column id="78" parent="63" name="Content">
       <Position>2</Position>
       <DataType>nvarchar(500 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="84" parent="68" name="IsCorrect">
+    <column id="79" parent="63" name="IsCorrect">
       <Position>3</Position>
       <DataType>bit|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="85" parent="68" name="QuestionId">
+    <column id="80" parent="63" name="QuestionId">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="86" parent="68" name="PK_Answers">
+    <index id="81" parent="63" name="PK_Answers">
       <Position>1</Position>
       <ColNames>AnswerId</ColNames>
       <Clustering>1</Clustering>
       <Unique>1</Unique>
     </index>
-    <index id="87" parent="68" name="IX_Answers_QuestionId">
-      <Position>2</Position>
-      <ColNames>QuestionId</ColNames>
-    </index>
-    <key id="88" parent="68" name="PK_Answers">
-      <ObjectId>1141579105</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <key id="82" parent="63" name="PK_Answers">
+      <ObjectId>965578478</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:25.553</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:25.553</ModifiedTimestamp>
       <ColNames>AnswerId</ColNames>
       <UnderlyingIndexName>PK_Answers</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="89" parent="68" name="FK_Answers_Questions_QuestionId">
-      <ObjectId>1157579162</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <foreign-key id="83" parent="63" name="FK_Answers_Questions_QuestionId">
+      <ObjectId>1125579048</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:38.657</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:38.657</ModifiedTimestamp>
       <ColNames>QuestionId</ColNames>
-      <RefTableId>1013578649</RefTableId>
+      <RefTableId>981578535</RefTableId>
       <RefTableName>Questions</RefTableName>
       <RefKeyName>PK_Questions</RefKeyName>
       <RefColNames>QuestionId</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="90" parent="69" name="QuestionId">
+    <column id="84" parent="64" name="QuestionId">
       <Position>1</Position>
       <SequenceIdentity>1</SequenceIdentity>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="91" parent="69" name="Content">
+    <column id="85" parent="64" name="Content">
       <Position>2</Position>
       <DataType>nvarchar(500 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="92" parent="69" name="QuizId">
+    <column id="86" parent="64" name="QuizId">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="93" parent="69" name="PK_Questions">
+    <index id="87" parent="64" name="PK_Questions">
       <Position>1</Position>
       <ColNames>QuestionId</ColNames>
       <Clustering>1</Clustering>
       <Unique>1</Unique>
     </index>
-    <index id="94" parent="69" name="IX_Questions_QuizId">
-      <Position>2</Position>
-      <ColNames>QuizId</ColNames>
-    </index>
-    <key id="95" parent="69" name="PK_Questions">
-      <ObjectId>1029578706</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.667</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.667</ModifiedTimestamp>
+    <key id="88" parent="64" name="PK_Questions">
+      <ObjectId>997578592</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:25.967</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:25.967</ModifiedTimestamp>
       <ColNames>QuestionId</ColNames>
       <UnderlyingIndexName>PK_Questions</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="96" parent="69" name="FK_Questions_Quizzes_QuizId">
-      <ObjectId>1045578763</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.667</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.667</ModifiedTimestamp>
+    <foreign-key id="89" parent="64" name="FK_Questions_Quizzes_QuizId">
+      <ObjectId>1141579105</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:38.863</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:38.863</ModifiedTimestamp>
       <ColNames>QuizId</ColNames>
-      <RefTableId>965578478</RefTableId>
+      <RefTableId>1013578649</RefTableId>
       <RefTableName>Quizzes</RefTableName>
       <RefKeyName>PK_Quizzes</RefKeyName>
       <RefColNames>QuizId</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="97" parent="70" name="QuizId">
+    <column id="90" parent="65" name="QuizId">
       <Position>1</Position>
       <SequenceIdentity>1</SequenceIdentity>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="98" parent="70" name="Name">
+    <column id="91" parent="65" name="Name">
       <Position>2</Position>
       <DataType>nvarchar(100 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="99" parent="70" name="Password">
+    <column id="92" parent="65" name="Password">
       <Position>3</Position>
       <DataType>nvarchar(max)|0s</DataType>
     </column>
-    <column id="100" parent="70" name="CreateDate">
+    <column id="93" parent="65" name="CreateDate">
       <Position>4</Position>
       <DataType>datetime2|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="101" parent="70" name="Duration">
+    <column id="94" parent="65" name="Duration">
       <Position>5</Position>
       <DataType>real|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="102" parent="70" name="MaxPoint">
+    <column id="95" parent="65" name="MaxPoint">
       <Position>6</Position>
       <DataType>real|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="103" parent="70" name="IsExpire">
+    <column id="96" parent="65" name="IsExpire">
       <Position>7</Position>
       <DataType>bit|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="104" parent="70" name="AccountUsername">
+    <column id="97" parent="65" name="AccountUsername">
       <Position>8</Position>
       <DataType>nvarchar(50 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="105" parent="70" name="PK_Quizzes">
+    <index id="98" parent="65" name="PK_Quizzes">
       <Position>1</Position>
       <ColNames>QuizId</ColNames>
       <Clustering>1</Clustering>
       <Unique>1</Unique>
     </index>
-    <index id="106" parent="70" name="IX_Quizzes_AccountUsername">
-      <Position>2</Position>
-      <ColNames>AccountUsername</ColNames>
-    </index>
-    <key id="107" parent="70" name="PK_Quizzes">
-      <ObjectId>981578535</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.667</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.667</ModifiedTimestamp>
+    <key id="99" parent="65" name="PK_Quizzes">
+      <ObjectId>1029578706</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:26.417</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:26.417</ModifiedTimestamp>
       <ColNames>QuizId</ColNames>
       <UnderlyingIndexName>PK_Quizzes</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="108" parent="70" name="FK_Quizzes_Accounts_AccountUsername">
-      <ObjectId>997578592</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.667</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.667</ModifiedTimestamp>
+    <foreign-key id="100" parent="65" name="FK_Quizzes_Accounts_AccountUsername">
+      <ObjectId>1157579162</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:38.923</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:38.923</ModifiedTimestamp>
       <ColNames>AccountUsername</ColNames>
       <RefTableId>917578307</RefTableId>
       <RefTableName>Accounts</RefTableName>
@@ -590,148 +575,136 @@
       <RefColNames>Username</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="109" parent="71" name="ResultId">
+    <column id="101" parent="66" name="ResultId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="110" parent="71" name="AnswerId">
+    <column id="102" parent="66" name="AnswerId">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="111" parent="71" name="PK_ResultDetail">
+    <index id="103" parent="66" name="PK_ResultDetail">
       <Position>1</Position>
       <ColNames>AnswerId
 ResultId</ColNames>
       <Clustering>1</Clustering>
       <Unique>1</Unique>
     </index>
-    <index id="112" parent="71" name="IX_ResultDetail_ResultId">
-      <Position>2</Position>
-      <ColNames>ResultId</ColNames>
-    </index>
-    <key id="113" parent="71" name="PK_ResultDetail">
-      <ObjectId>1189579276</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <key id="104" parent="66" name="PK_ResultDetail">
+      <ObjectId>1061578820</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:26.713</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:26.713</ModifiedTimestamp>
       <ColNames>AnswerId
 ResultId</ColNames>
       <UnderlyingIndexName>PK_ResultDetail</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="114" parent="71" name="FK_ResultDetail_Results_ResultId">
-      <ObjectId>1221579390</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <foreign-key id="105" parent="66" name="FK_ResultDetail_Results_ResultId">
+      <ObjectId>1189579276</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:39.440</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.440</ModifiedTimestamp>
       <ColNames>ResultId</ColNames>
-      <RefTableId>1061578820</RefTableId>
+      <RefTableId>1077578877</RefTableId>
       <RefTableName>Results</RefTableName>
       <RefKeyName>PK_Results</RefKeyName>
       <RefColNames>ResultId</RefColNames>
     </foreign-key>
-    <foreign-key id="115" parent="71" name="FK_ResultDetail_Answers_AnswerId">
-      <ObjectId>1205579333</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <foreign-key id="106" parent="66" name="FK_ResultDetail_Answers_AnswerId">
+      <ObjectId>1173579219</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:39.247</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.247</ModifiedTimestamp>
       <ColNames>AnswerId</ColNames>
-      <RefTableId>1125579048</RefTableId>
+      <RefTableId>949578421</RefTableId>
       <RefTableName>Answers</RefTableName>
       <RefKeyName>PK_Answers</RefKeyName>
       <RefColNames>AnswerId</RefColNames>
     </foreign-key>
-    <column id="116" parent="72" name="ResultId">
+    <column id="107" parent="67" name="ResultId">
       <Position>1</Position>
       <SequenceIdentity>1</SequenceIdentity>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="117" parent="72" name="Point">
+    <column id="108" parent="67" name="Point">
       <Position>2</Position>
       <DataType>real|0s</DataType>
     </column>
-    <column id="118" parent="72" name="StartTime">
+    <column id="109" parent="67" name="StartTime">
       <Position>3</Position>
       <DataType>datetime2|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="119" parent="72" name="FinishTime">
+    <column id="110" parent="67" name="FinishTime">
       <Position>4</Position>
       <DataType>datetime2|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="120" parent="72" name="QuizId">
+    <column id="111" parent="67" name="QuizId">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="121" parent="72" name="AccountUsername">
+    <column id="112" parent="67" name="AccountUsername">
       <Position>6</Position>
       <DataType>nvarchar(50 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="122" parent="72" name="PK_Results">
+    <index id="113" parent="67" name="PK_Results">
       <Position>1</Position>
       <ColNames>ResultId</ColNames>
       <Clustering>1</Clustering>
       <Unique>1</Unique>
     </index>
-    <index id="123" parent="72" name="IX_Results_AccountUsername">
-      <Position>2</Position>
-      <ColNames>AccountUsername</ColNames>
-    </index>
-    <index id="124" parent="72" name="IX_Results_QuizId">
-      <Position>3</Position>
-      <ColNames>QuizId</ColNames>
-    </index>
-    <key id="125" parent="72" name="PK_Results">
-      <ObjectId>1077578877</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <key id="114" parent="67" name="PK_Results">
+      <ObjectId>1093578934</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:26.923</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:26.923</ModifiedTimestamp>
       <ColNames>ResultId</ColNames>
       <UnderlyingIndexName>PK_Results</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="126" parent="72" name="FK_Results_Quizzes_QuizId">
-      <ObjectId>1109578991</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <foreign-key id="115" parent="67" name="FK_Results_Quizzes_QuizId">
+      <ObjectId>1221579390</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:39.747</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.747</ModifiedTimestamp>
       <ColNames>QuizId</ColNames>
-      <RefTableId>965578478</RefTableId>
+      <RefTableId>1013578649</RefTableId>
       <RefTableName>Quizzes</RefTableName>
       <RefKeyName>PK_Quizzes</RefKeyName>
       <RefColNames>QuizId</RefColNames>
     </foreign-key>
-    <foreign-key id="127" parent="72" name="FK_Results_Accounts_AccountUsername">
-      <ObjectId>1093578934</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.670</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.670</ModifiedTimestamp>
+    <foreign-key id="116" parent="67" name="FK_Results_Accounts_AccountUsername">
+      <ObjectId>1205579333</ObjectId>
+      <CreatedTimestamp>2021-03-25.22:24:39.653</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:39.653</ModifiedTimestamp>
       <ColNames>AccountUsername</ColNames>
       <RefTableId>917578307</RefTableId>
       <RefTableName>Accounts</RefTableName>
       <RefKeyName>PK_Accounts</RefKeyName>
       <RefColNames>Username</RefColNames>
     </foreign-key>
-    <column id="128" parent="73" name="MigrationId">
+    <column id="117" parent="68" name="MigrationId">
       <Position>1</Position>
       <DataType>nvarchar(150 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="129" parent="73" name="ProductVersion">
+    <column id="118" parent="68" name="ProductVersion">
       <Position>2</Position>
       <DataType>nvarchar(32 char)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="130" parent="73" name="PK___EFMigrationsHistory">
+    <index id="119" parent="68" name="PK___EFMigrationsHistory">
       <Position>1</Position>
       <ColNames>MigrationId</ColNames>
       <Clustering>1</Clustering>
       <Unique>1</Unique>
     </index>
-    <key id="131" parent="73" name="PK___EFMigrationsHistory">
+    <key id="120" parent="68" name="PK___EFMigrationsHistory">
       <ObjectId>901578250</ObjectId>
-      <CreatedTimestamp>2021-02-26.06:14:43.603</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-26.06:14:43.603</ModifiedTimestamp>
+      <CreatedTimestamp>2021-03-25.22:24:24.803</CreatedTimestamp>
+      <ModifiedTimestamp>2021-03-25.22:24:24.803</ModifiedTimestamp>
       <ColNames>MigrationId</ColNames>
       <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
       <Primary>1</Primary>
