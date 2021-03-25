@@ -38,11 +38,11 @@ export class TeacherProfileComponent implements OnInit {
         this.loadProfile();
     }
 
+
     changePasswordClick() {
         document.getElementById('editForm').classList.add('d-none');
         document.getElementById('changePassForm').classList.remove('d-none');
     }
-
 
     initialForm() {
         this.editForm = this.fb.group({
@@ -56,7 +56,7 @@ export class TeacherProfileComponent implements OnInit {
         });
     }
 
-    updatePassword() {
+    async updatePassword() {
         let isValid = true;
         this.status = '';
         if (this.changePasswordForm.controls['currentPassword'].value.length <= 0) {
@@ -84,18 +84,10 @@ export class TeacherProfileComponent implements OnInit {
             return;
         }
 
-        this.accountService.updatePassword(this.changePasswordForm.value).subscribe(() => {
-            let done = false;
-            this.accountService.getProfile().subscribe((account: Account) => {
-                this.account = account;
-                this.accountService.setCurrentAccount(account);
-                this.initialForm();
-                this.status = 'Saved change!';
-                done = true;
-            });
-            if (!done) {
-                delay(1000)
-            }
+        let isSuccess = false;
+        await this.accountService.updatePassword(this.changePasswordForm.value).toPromise().then(() => {
+            alert("Changing successful");
+            isSuccess = true;
         }, error => {
             if (error.status === 400) {
                 this.currentPasswordError = 'Wrong password!';
@@ -103,6 +95,14 @@ export class TeacherProfileComponent implements OnInit {
                 this.currentPasswordError = 'Unhandle error, Please contact to admin';
             }
         });
+
+        if (isSuccess) {
+            this.accountService.getProfile().toPromise().then((account: Account) => {
+                sessionStorage.setItem('account', JSON.stringify(account));
+                this.editForm.reset();
+                window.location.reload();
+            });
+        }
     }
 
     loadProfile() {
@@ -112,8 +112,9 @@ export class TeacherProfileComponent implements OnInit {
         });
     }
 
-    updateProfile() {
+    async updateProfile() {
         let isValid = true;
+        this.status = '';
         if (this.editForm.controls['name'].value.length <= 0) {
             this.nameErr = 'Name is required!';
             isValid = false;
@@ -126,21 +127,25 @@ export class TeacherProfileComponent implements OnInit {
         } else {
             this.passErr = '';
         }
-
+        let isSuccess = false;
         if (isValid) {
-            this.accountService.updateProfile(this.editForm.value).subscribe(() => {
-                this.accountService.getProfile().subscribe((account: Account) => {
-                    this.account = account;
-                    this.accountService.setCurrentAccount(account);
-                    this.initialForm();
-                });
+            await this.accountService.updateProfile(this.editForm.value).toPromise().then(() => {
+                alert("Changing successful");
+                isSuccess = true;
             }, error => {
                 if (error.status === 400) {
-                    this.passErr = "Wrong password!";
+                    this.passErr = 'Wrong password!';
                 } else {
-                    this.passErr = "Unhandle error, Please contact to admin";
+                    this.passErr = 'Unhandle error, Please contact to admin';
                 }
             });
+            if (isSuccess) {
+                this.accountService.getProfile().toPromise().then((account: Account) => {
+                    sessionStorage.setItem('account', JSON.stringify(account));
+                    this.editForm.reset();
+                    window.location.reload();
+                });
+            }
         }
     }
 
