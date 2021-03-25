@@ -35,7 +35,13 @@ export class CreateQuestionComponent implements OnInit {
         this.router.navigate(['/login']);
     }
     addChocie(error) {
-        if (this.otherChoice.includes(this.otherAnswer) || this.otherAnswer === this.correctAnswer || this.otherAnswer.length == 0) {
+
+        if (this.otherAnswer === "" || this.otherAnswer == null)
+        {
+            this.errorCreateQuestion = "can't add empty";
+            this.modalService.open(error);
+        }
+        else if (this.otherChoice.includes(this.otherAnswer) || this.otherAnswer === this.correctAnswer || this.otherAnswer.length == 0) {
             this.errorCreateQuestion = "can't add this choice";
             this.modalService.open(error);
         } else {
@@ -65,15 +71,16 @@ export class CreateQuestionComponent implements OnInit {
         if (this.otherChoice.includes(this.correctAnswer)) {
             this.errorCreateQuestion = "Plase enter correct answer disferrence other choice";
             this.modalService.open(error);
-        } else if (this.question.content === "") {
+        } else if (this.question.content === "" || this.question.content == null) {
             this.errorCreateQuestion = "Plase enter content question";
             this.modalService.open(error);
-        } else if (this.correctAnswer === "") {
+        } else if (this.correctAnswer === "" || this.correctAnswer == null) {
             this.errorCreateQuestion = "Plase enter correct answer";
             this.modalService.open(error);
-        } else
+        }
+        else
         {
-            if (this.otherChoice.length <= 0)
+            if (this.otherChoice.length <= 0 || this.otherChoice == null)
             {
                 this.errorCreateQuestion = "add more other choice to create question";
                 this.modalService.open(error);
@@ -86,7 +93,9 @@ export class CreateQuestionComponent implements OnInit {
                 };
                 this.question.answers.push(x);
                 for (let s of this.otherChoices) {
-                    this.question.answers.push(s);
+                    if (s != null) {
+                        this.question.answers.push(s);
+                    }
                 }
                 this.question.questionId = 0;
                 this.listQuestion.push(this.question);
