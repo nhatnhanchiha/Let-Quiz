@@ -23,11 +23,6 @@ export class CreateQuestionComponent implements OnInit {
     otherAnswer: string;
     otherChoice: string[] = new Array();
     otherChoices: Answer[] = new Array();
-    a: Answer = {
-        answerId: 1,
-        content: "",
-        isCorrect: true
-    };
     massageCreateQuizt: string;
     constructor(private router: Router, private modalService: NgbModal) {     }
     errorCreateQuestion: string;
@@ -43,7 +38,6 @@ export class CreateQuestionComponent implements OnInit {
         if (this.otherChoice.includes(this.otherAnswer) || this.otherAnswer === this.correctAnswer || this.otherAnswer.length == 0) {
             this.errorCreateQuestion = "can't add this choice";
             this.modalService.open(error);
-            //confirm("can't add this choice");
         } else {
             this.otherChoice.push(this.otherAnswer);
             var x: Answer = {
@@ -52,6 +46,7 @@ export class CreateQuestionComponent implements OnInit {
                 isCorrect: false
             };
             this.otherChoices.push(x);
+            this.otherAnswer = "";
         }
     }
     removeChocie(fg: string) {
@@ -70,15 +65,26 @@ export class CreateQuestionComponent implements OnInit {
         if (this.otherChoice.includes(this.correctAnswer)) {
             this.errorCreateQuestion = "Plase enter correct answer disferrence other choice";
             this.modalService.open(error);
-            //confirm("Plase enter correct answer disferrence other choice");
-        } else {
-            if (this.otherChoice.length <= 0) {
+        } else if (this.question.content === "") {
+            this.errorCreateQuestion = "Plase enter content question";
+            this.modalService.open(error);
+        } else if (this.correctAnswer === "") {
+            this.errorCreateQuestion = "Plase enter correct answer";
+            this.modalService.open(error);
+        } else
+        {
+            if (this.otherChoice.length <= 0)
+            {
                 this.errorCreateQuestion = "add more other choice to create question";
                 this.modalService.open(error);
-                //confirm("add more other choice to create question");
-            } else {
-                this.a.content = this.correctAnswer;
-                this.question.answers.push(this.a);
+            } else
+            {
+                var x: Answer = {
+                    answerId: 1,
+                    content: this.correctAnswer,
+                    isCorrect: true
+                };
+                this.question.answers.push(x);
                 for (let s of this.otherChoices) {
                     this.question.answers.push(s);
                 }
