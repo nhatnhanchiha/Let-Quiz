@@ -36,20 +36,24 @@ export class QuizComponent implements OnInit, OnDestroy {
         let quizID = sessionStorage.getItem("quizID");
         this.quiz = JSON.parse(sessionStorage.getItem("quiz"));
 
-        this.questionService.getQuestionsByQuizID(quizID, token).subscribe(
-            (data: Question[]) => {
-                this.questions = data;
-                this.questions.forEach(q => {
-                    let ansSelect: AnswerSelect = {questionId: q.questionId, answerId: 0};
-                    this.answerSelect.push(ansSelect);
-                })
-            }
-        );
-
-        let today = new Date();
-        this.startTimeStr = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() + ' ' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-        this.countDown();
+        if (quizID == null) {
+            this.router.navigate(['student-index']);
+        } else {
+            this.questionService.getQuestionsByQuizID(quizID, token).subscribe(
+                (data: Question[]) => {
+                    this.questions = data;
+                    this.questions.forEach(q => {
+                        let ansSelect: AnswerSelect = {questionId: q.questionId, answerId: 0};
+                        this.answerSelect.push(ansSelect);
+                    })
+                }
+            );
+    
+            let today = new Date();
+            this.startTimeStr = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() + ' ' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    
+            this.countDown();
+        }
     }
 
     countDown() {
