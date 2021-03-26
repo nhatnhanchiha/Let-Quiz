@@ -158,7 +158,7 @@ namespace Let_Quiz.Controllers
 
         [Authorize(Roles = "True")]
         [HttpGet("GetQuizzesForTeacher")]
-        public ActionResult<IEnumerable<Quiz>> GetQuizzesForTeacher([FromQuery] PageInfoDTO pageInfo)
+        public ActionResult<IEnumerable<Quiz>> GetQuizzesForTeacher([FromQuery] PageInfoDTO pageInfo, [FromQuery] String teacherId)
         {
             if (pageInfo == null || pageInfo.CurrentPage <= 0 || pageInfo.MaxRecord <= 0)
             {
@@ -170,10 +170,10 @@ namespace Let_Quiz.Controllers
                 pageInfo.SearchValue = "";
             }
 
-            var quizzes = _quizzesRepository.GetQuizzesForTeacher(pageInfo);
+            var quizzes = _quizzesRepository.GetQuizzesForTeacher(pageInfo, teacherId);
             var quizzesDTO = _mapper.Map<IEnumerable<QuizDTO>>(quizzes);
 
-            int maxPage = _quizzesRepository.GetMaxPageForTeacher(pageInfo);
+            int maxPage = _quizzesRepository.GetMaxPageForTeacher(pageInfo, teacherId);
 
             string url = Url.Link("GetQuizzes", null);
 

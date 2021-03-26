@@ -43,8 +43,8 @@ export class QuizService {
         });
     }
 
-    getQuizzesForTeacher(token: string, searchValue: string, currentPage: number, maxRecord: number): Observable<PagingQuiz> {
-        return this.http.get<PagingQuiz>(`${this.url}/GetQuizzesForTeacher?SearchValue=${searchValue}&CurrentPage=${currentPage}&MaxRecord=${maxRecord}`, {
+    getQuizzesForTeacher(token: string, searchValue: string, currentPage: number, maxRecord: number, teacherId: string): Observable<PagingQuiz> {
+        return this.http.get<PagingQuiz>(`${this.url}/GetQuizzesForTeacher?SearchValue=${searchValue}&CurrentPage=${currentPage}&MaxRecord=${maxRecord}&teacherId=${teacherId}`, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -52,8 +52,8 @@ export class QuizService {
         });
     }
 
-    changePageForTeacher(token: string, url: string): Observable<PagingQuiz> {
-        return this.http.get<PagingQuiz>(url, {
+    changePageForTeacher(token: string, url: string, teacherId: string): Observable<PagingQuiz> {
+        return this.http.get<PagingQuiz>(url + `&teacherId=${teacherId}`, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

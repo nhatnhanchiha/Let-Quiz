@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Quiz } from '../models/Quiz';
 import { QuizService } from '../services/QuizService';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Account } from '../models/Account';
 
 @Component({
     templateUrl: './teacher-index.component.html',
@@ -34,7 +35,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
         let currentPage = 1;
 
-        this.quizService.getQuizzesForTeacher(token, this.searchValue, currentPage, this.maxRecord).subscribe(
+        this.quizService.getQuizzesForTeacher(token, this.searchValue, currentPage, this.maxRecord, this.account.username).subscribe(
             (data: PagingQuiz) => {
                 this.pagingQuiz = data;
                 this.quizzes = data.quizzes;
@@ -81,7 +82,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
 
         if (this.pagingQuiz.nextPage != null) {
-            this.quizService.changePageForTeacher(token, this.pagingQuiz.nextPage).subscribe(
+            this.quizService.changePageForTeacher(token, this.pagingQuiz.nextPage, this.account.username).subscribe(
                 (data: PagingQuiz) => {
                     this.pagingQuiz = data;
                     this.quizzes = data.quizzes;
@@ -95,7 +96,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
 
         if (this.pagingQuiz.previousPage != null) {
-            this.quizService.changePageForTeacher(token, this.pagingQuiz.previousPage).subscribe(
+            this.quizService.changePageForTeacher(token, this.pagingQuiz.previousPage, this.account.username).subscribe(
                 (data: PagingQuiz) => {
                     this.pagingQuiz = data;
                     this.quizzes = data.quizzes;
@@ -109,7 +110,7 @@ export class TeacherIndexComponent implements OnInit {
         let token: string = sessionStorage.getItem('token');
         let currentPage = 1;
 
-        this.quizService.getQuizzesForTeacher(token, this.searchValue, currentPage, this.maxRecord).subscribe(
+        this.quizService.getQuizzesForTeacher(token, this.searchValue, currentPage, this.maxRecord, this.account.username).subscribe(
             (data: PagingQuiz) => {
                 this.pagingQuiz = data;
                 this.quizzes = data.quizzes;

@@ -91,14 +91,18 @@ export class CreateQuestionComponent implements OnInit {
                     content: this.correctAnswer,
                     isCorrect: true
                 };
-                this.question.answers.push(x);
+                let nquestion: Question = {
+                    content: this.question.content,
+                    questionId: 1,
+                    answers: []
+                }
+                nquestion.answers.push(x);
                 for (let s of this.otherChoices) {
                     if (s != null) {
-                        this.question.answers.push(s);
+                        nquestion.answers.push(s);
                     }
                 }
-                this.question.questionId = 0;
-                this.listQuestion.push(this.question);
+                this.listQuestion.push(nquestion);
                 sessionStorage.setItem('listQuestion', JSON.stringify(this.listQuestion));
                 this.massageCreateQuizt = "add question successful";
                 this.modalService.open(message);
